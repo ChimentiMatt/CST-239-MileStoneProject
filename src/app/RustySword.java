@@ -31,6 +31,7 @@ public class RustySword {
 		System.out.println("");
 	}
 	
+	
 	public void reduceStock(int num) {
 		this.quantity = this.quantity - num;
 	}

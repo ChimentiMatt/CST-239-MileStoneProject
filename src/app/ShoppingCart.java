@@ -24,6 +24,16 @@ public class ShoppingCart {
 		this.printBill();
 	}
 	
+	public boolean inCart(String item) {
+		for (int i = 0; i < inCartArray.size(); i++)
+		{
+			if (inCartArray.get(i).equals(item)) 
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void removeSword(RustySword sword, String item) {
 		for (int i = 0; i < inCartArray.size(); i++)
@@ -32,6 +42,8 @@ public class ShoppingCart {
 				inCartArray.remove(item);
 				sword.increaseStock();
 				this.bill = this.bill - sword.getBasePrice();
+				System.out.println("Removed from cart");
+				System.out.println("");
 				break;
 			}	
 		}
@@ -49,10 +61,12 @@ public class ShoppingCart {
 		}
 	}
 	
-
-	
 	public void checkout(){
-		
+		inCartArray.clear();
+		System.out.println("You spent " + this.getBill() + " on the following items");
+		this.printCurrentCart();
+		this.bill = 0;
+		System.out.println("");
 	}
 	
 }

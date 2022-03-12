@@ -9,7 +9,7 @@ public class StoreFront {
 		int choice;
 		String item;
 		int quantity;
-		System.out.println("Welcome to Our Shop");
+		System.out.println("Welcome Gladiator to our shop");
 		System.out.println("");
 		
 		while (true) {
@@ -49,8 +49,14 @@ public class StoreFront {
 			else if (choice == 4) 
 			{
 				inventory.printCart();
+				inventory.checkout();
 			}
-			
+			else if (choice == 5) 
+			{
+				System.out.println("");
+				System.out.println("Goodbye Gladiator");
+				break;
+			}
 			
 		}
 	}

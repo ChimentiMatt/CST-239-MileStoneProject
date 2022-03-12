@@ -31,7 +31,6 @@ public class Inventory {
 		}
 	}
 	
-	
 	public void inventoryCheck(String itemName, int quantity) {
 		if (itemName.equals("RustySword")) 
 		{
@@ -53,7 +52,19 @@ public class Inventory {
 	public void removeItem(String itemName){
 		if (itemName.equals("RustySword"))
 		{
-			shoppingCart.removeSword(rustySword, itemName);
+			if (shoppingCart.inCart(itemName)) {
+				shoppingCart.removeSword(rustySword, itemName);
+			}
+			else {
+				System.out.println("");
+				System.out.println("You do not have '" + itemName + " in your current cart" );
+				System.out.println("");
+			}
+		}
+		else {
+			System.out.println("");
+			System.out.println("We do not sell '" + itemName + "'" );
+			System.out.println("");
 		}
 	}
 	
@@ -64,5 +75,7 @@ public class Inventory {
 		System.out.println("");
 	}
 	
-	
+	public void checkout() {
+		shoppingCart.checkout();
+	}
 }
