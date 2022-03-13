@@ -1,10 +1,10 @@
 package app;
 
 public class RustySword {
-	String name;
-	int basePrice;
-	int quantity;
-	String description;
+	private String name;
+	private int basePrice;
+	private int quantity;
+	private String description;
 	
 	RustySword(){
 		this.name = "RustySword";
@@ -31,7 +31,6 @@ public class RustySword {
 		System.out.println("");
 	}
 	
-	
 	public void reduceStock(int num) {
 		this.quantity = this.quantity - num;
 	}
@@ -39,8 +38,5 @@ public class RustySword {
 	public void increaseStock() {
 		this.quantity = this.quantity + 1;
 	}
-	
-	public void test(){
-		System.out.println("test");
-	}
+
 }

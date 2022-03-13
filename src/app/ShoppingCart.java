@@ -3,9 +3,8 @@ package app;
 import java.util.ArrayList;
 
 public class ShoppingCart {
+	private ArrayList<String> inCartArray = new ArrayList<String>();
 	private int bill;
-	ArrayList<String> inCartArray = new ArrayList<String>();
-	private RustySword rustySword = new RustySword();
 	
 	ShoppingCart() {
 		this.bill = 0;
