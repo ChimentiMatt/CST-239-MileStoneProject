@@ -5,10 +5,8 @@ import java.util.Scanner;
 
 /** Class for StoreFront */
 public class StoreFront {
-	/**
-	 * This is the main method for a program that is a RPG's item shop
-	 * @param args
-	 */
+	/** This is the main method for a program that is a RPG's item shop
+	 * @param args*/
 	public static void main(String[] args) {
 		// Create object of RustySword stored in rustySword 
 		RustySword rustySword = new RustySword();
