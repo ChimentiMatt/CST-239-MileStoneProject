@@ -1,17 +1,16 @@
 package app;
 import java.util.Scanner;
 
-/**@author      Matthew Chimenti chimcode@gmail.com */
+/**@author Matthew Chimenti chimcode@gmail.com */
 
 /** Class for StoreFront */
 public class StoreFront {
 	/** This is the main method for a program that is a RPG's item shop
 	 * @param args*/
 	public static void main(String[] args) {
-		// Create object of RustySword stored in rustySword 
-		RustySword rustySword = new RustySword();
+
 		// Create object of Inventory stored in inventory 
-		Inventory inventory = new Inventory(rustySword);
+		Inventory inventory = new Inventory();
 		// Variable name for Scanner 
 		Scanner scnr = new Scanner(System.in);
 		// Variable to control the REPL's 
@@ -20,6 +19,7 @@ public class StoreFront {
 		String item;
 		// Variable to store quantity of items 
 		int quantity;
+		Object currentItem;
 		// Output streams to green the user 
 		System.out.println("Welcome Gladiator to our shop");
 		System.out.println("");
@@ -45,8 +45,9 @@ public class StoreFront {
 				System.out.print("Enter a items name to see its description or enter 'back': ");
 				// Reassign item variable with input from user to use next to get description of item 
 				item = scnr.next();
+				currentItem = inventory.identifyItem(item);
 				// invoke the .getItemDescription method from Inventory 
-				inventory.getItemDescription(item);
+				inventory.getItemDescription(currentItem);
 			}
 			// Check if REPL choice is 2 to do logic that places item in cart 
 			else if (choice == 2)
@@ -57,13 +58,15 @@ public class StoreFront {
 				System.out.print("Enter the items name you wish to add: ");
 				// Reassign item variable with input from user to then do inventory and cart logics 
 				item = scnr.next();
+				currentItem = inventory.identifyItem(item);
 				// Output stream to prompt the user for how many of the item they want to buy 
 				System.out.print("Enter the amount you want to purchase: ");
 				// Reassign quantity variable with int input to be then passed onto the Inventory method inventoryCheck 
 				quantity = scnr.nextInt();
-				// Invoke the .inventoryCheck method from Inventory to check if the item is in stock, is a valid item and then add it to the 
-				// shopping cart if it passes the test 
-				inventory.inventoryCheck(item, quantity);
+				// FIX COMMENT 
+				if (inventory.stockCheck(currentItem, quantity)) {
+					inventory.addItemtoCart(currentItem, quantity);
+				}
 			}
 			// Check if REPL choice is 3 to do logic that removes item from the cart 
 			else if (choice == 3) 
@@ -74,8 +77,9 @@ public class StoreFront {
 				System.out.print("Enter the items name you wish to remove: ");
 				// Reassign item variable with input from user to then use as a param on the removeItem method from Inventory 
 				item = scnr.next();
-				// Invoke the .removeItem method from Inventory to remove an item from the shopping cart
-				inventory.removeItem(item);
+				currentItem = inventory.identifyItem(item);
+				// FIX
+				inventory.removeItemFromCart(currentItem, 1);
 				
 			}
 			// Check if REPL choice is 4 to do logic that end the transaction or 'checkout.' 
