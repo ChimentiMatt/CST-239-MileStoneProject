@@ -13,7 +13,7 @@ public class Weapon
 	 * @param name String
 	 * @param description String
 	 * @param price integer
-	 * @param quantity integer */
+	 * @param attackPower integer */
 	public Weapon(String name, String description, int price, int quantity, int attackPower)
 	{
 		this.name = name;

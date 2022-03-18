@@ -138,7 +138,7 @@ public class Inventory {
 	}
 	
 	/** Identifies item by using the string passed in and getting the item object
-	 * itemName String 
+	 * @param itemName String 
 	 * @return (itemName) object*/
 	public Object identifyItem(String itemName) {
 		if (itemName.equals("CopperSword"))
