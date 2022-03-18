@@ -14,7 +14,7 @@ public class Inventory {
 	public Object mediumPotion = new MediumPotion();
 	
 	/** Create object of ShoppingCart stored in shoppingCart */
-	private ShoppingCart shoppingCart = new ShoppingCart();
+	ShoppingCart shoppingCart = new ShoppingCart();
 	
 	/**  Output stream displaying the item, price and available quantity */
 	public void getInventory() {
@@ -39,6 +39,9 @@ public class Inventory {
 			System.out.println("\n" + ((Armor)object).getDescription() + "\n");
 		if (object instanceof Health)
 			System.out.println("\n" + ((Health)object).getDescription() + "\n");
+		else {
+			System.out.println("Invalid selection\n");
+		}
 	}
 	
 	/** Output stream to tell the user their current bill and show the items in the cart */
@@ -53,7 +56,10 @@ public class Inventory {
 	}
 	
 	public boolean stockCheck(Object object, int quantity) {
-		if (object instanceof Weapon) {
+		if (quantity == 0) {
+			return false;
+		}
+		else if (object instanceof Weapon) {
 			if (((Weapon)object).getQuantity() - quantity >= 0) 
 				return true;
 		}
@@ -65,6 +71,7 @@ public class Inventory {
 			if (((Health)object).getQuantity() - quantity >= 0) 
 				return true;
 		}
+		System.out.println("\nInvalid amount\n");
 		return false;
 	}
 	
@@ -111,6 +118,9 @@ public class Inventory {
 				System.out.println("\nYou do not have '" + ((Health)object).getName() + " in your current cart\n");
 			}
 		}
+		else {
+			System.out.println("\nThat item is not in your cart\n");
+		}
 	}
 	
 	public Object identifyItem(String itemName) {
@@ -127,7 +137,7 @@ public class Inventory {
 		else if (itemName.equals("MediumPotion"))
 			return mediumPotion;		
 		else {			
-			return copperSword;
+			return null;
 		}
 	}
 	

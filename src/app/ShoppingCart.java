@@ -41,6 +41,9 @@ public class ShoppingCart {
 	
 	/** Output stream that displays current items in cart using a for loop */
 	public void printCurrentCart() {
+		if (inCartArray.size() == 0) {
+			System.out.println("You cart is empty");
+		}
 		for (int i = 0; i < inCartArray.size(); i++)
 		{
 			System.out.println(i + 1 + ". " + inCartArray.get(i));

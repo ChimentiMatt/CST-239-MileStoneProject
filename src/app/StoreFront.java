@@ -11,6 +11,7 @@ public class StoreFront {
 
 		// Create object of Inventory stored in inventory 
 		Inventory inventory = new Inventory();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		// Variable name for Scanner 
 		Scanner scnr = new Scanner(System.in);
 		// Variable to control the REPL's 
@@ -32,7 +33,7 @@ public class StoreFront {
 			System.out.println("3: View your cart ");
 			System.out.println("4: Remove item from cart ");
 			System.out.println("5: Checkout ");
-			System.out.println("3: Leave ");
+			System.out.println("6: Leave ");
 			
 			// Assign choice from user input to control REPL 
 			choice = scnr.nextInt();
@@ -62,7 +63,7 @@ public class StoreFront {
 				currentItem = inventory.identifyItem(item);
 				// Output stream to prompt the user for how many of the item they want to buy 
 				System.out.print("Enter the amount you want to purchase: ");
-				// Reassign quantity variable with int input to be then passed onto the Inventory method inventoryCheck 
+				// Reassign quantity variable with integer input to be then passed onto the Inventory method inventoryCheck 
 				quantity = scnr.nextInt();
 				// FIX COMMENT 
 				if (inventory.stockCheck(currentItem, quantity)) {
