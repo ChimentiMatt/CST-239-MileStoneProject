@@ -1,26 +1,20 @@
 package app;
 
-/** Class Weapon */
-public class Weapon 
+public class Armor 
 {
 	protected String name;
 	protected String description;
 	protected int price;
 	protected int quantity;
-	protected int attackPower;
+	protected int defense;
 	
-	/** Constructor to initialize Weapon from subclasses
-	 * @param name String
-	 * @param description String
-	 * @param price integer
-	 * @param quantity integer */
-	public Weapon(String name, String description, int price, int quantity, int attackPower)
+	public Armor(String name, String description, int price, int quantity, int defense)
 	{
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
-		this.attackPower = attackPower;
+		this.defense = defense;
 	}
 	
 	public String getName()
@@ -43,6 +37,12 @@ public class Weapon
 		return this.quantity;
 	}
 	
+	public int getDefense()
+	{
+		return this.defense;
+	}
+	
+	
 	public void increaseQuantity(int num)
 	{
 		this.quantity = this.quantity + num;
@@ -52,5 +52,4 @@ public class Weapon
 	{
 		this.quantity = this.quantity - num;
 	}
-
 }

@@ -1,26 +1,20 @@
 package app;
 
-/** Class Weapon */
-public class Weapon 
-{
+public class Health {
+	
 	protected String name;
 	protected String description;
 	protected int price;
 	protected int quantity;
-	protected int attackPower;
+	protected int healingPower;
 	
-	/** Constructor to initialize Weapon from subclasses
-	 * @param name String
-	 * @param description String
-	 * @param price integer
-	 * @param quantity integer */
-	public Weapon(String name, String description, int price, int quantity, int attackPower)
+	public Health(String name, String description, int price, int quantity, int healingPower)
 	{
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.quantity = quantity;
-		this.attackPower = attackPower;
+		this.healingPower = healingPower;
 	}
 	
 	public String getName()
@@ -43,6 +37,11 @@ public class Weapon
 		return this.quantity;
 	}
 	
+	public int getHealingPower()
+	{
+		return this.quantity;
+	}
+	
 	public void increaseQuantity(int num)
 	{
 		this.quantity = this.quantity + num;
@@ -52,5 +51,4 @@ public class Weapon
 	{
 		this.quantity = this.quantity - num;
 	}
-
 }

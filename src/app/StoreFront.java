@@ -21,7 +21,7 @@ public class StoreFront {
 		int quantity;
 		Object currentItem;
 		// Output streams to green the user 
-		System.out.println("Welcome Gladiator to our shop");
+		System.out.println("\nWelcome to Grumbling Goblins Gladiator");
 		System.out.println("");
 		
 		while (true) {
@@ -29,9 +29,10 @@ public class StoreFront {
 			System.out.println("What would you like to do? ");
 			System.out.println("1: View stock ");
 			System.out.println("2: Add Item to cart ");
-			System.out.println("3: Remove item from cart ");
-			System.out.println("4: Checkout ");
-			System.out.println("5: Leave ");
+			System.out.println("3: View your cart ");
+			System.out.println("4: Remove item from cart ");
+			System.out.println("5: Checkout ");
+			System.out.println("3: Leave ");
 			
 			// Assign choice from user input to control REPL 
 			choice = scnr.nextInt();
@@ -68,8 +69,11 @@ public class StoreFront {
 					inventory.addItemtoCart(currentItem, quantity);
 				}
 			}
+			else if (choice == 3) {
+				inventory.printCart();
+			}
 			// Check if REPL choice is 3 to do logic that removes item from the cart 
-			else if (choice == 3) 
+			else if (choice == 4) 
 			{
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
 				inventory.printCart();
@@ -83,7 +87,7 @@ public class StoreFront {
 				
 			}
 			// Check if REPL choice is 4 to do logic that end the transaction or 'checkout.' 
-			else if (choice == 4) 
+			else if (choice == 5) 
 			{
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
 				inventory.printCart();
@@ -91,7 +95,7 @@ public class StoreFront {
 				inventory.checkout();
 			}
 			// Check if REPL choice is 5 output stream a goodbye message and break program 
-			else if (choice == 5) 
+			else if (choice == 6) 
 			{
 				// Output stream to prompt Goodbye 
 				System.out.println("");
@@ -102,8 +106,7 @@ public class StoreFront {
 			// Output stream telling user their REPL selection was not valid */
 			else {
 				// Output stream to display Invalid selection 
-				System.out.println("");
-				System.out.println("Invalid selection");
+				System.out.println("\nInvalid selection");
 			}
 		
 		}

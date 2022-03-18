@@ -61,7 +61,12 @@ public class ShoppingCart {
 		this.bill += price * quantity;
 		for (int i = 0; i < quantity; i++) 
 		{
-			this.inCartArray.add(((CopperSword)object).getName());			
+			if (object instanceof Weapon) 
+				this.inCartArray.add(((Weapon)object).getName());		
+			else if (object instanceof Armor) 
+				this.inCartArray.add(((Armor)object).getName());		
+			else if (object instanceof Health) 
+				this.inCartArray.add(((Health)object).getName());		
 		}
 		this.printBill();
 	}
