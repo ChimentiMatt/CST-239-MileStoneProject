@@ -23,34 +23,45 @@ public class Weapon
 		this.attackPower = attackPower;
 	}
 	
+	/** Getter for Weapon name 
+	 * @return name String */
 	public String getName()
 	{
 		return this.name;
 	}
 	
+	/** Getter for Weapon description 
+	 * @return description String */
 	public String getDescription()
 	{
 		return this.description;
 	}
-
+	
+	/** Getter for Weapon price 
+	 * @return price integer*/
 	public int getPrice()
 	{
 		return this.price;
 	}
 	
+	/** Getter for Weapon quantity 
+	 * @return quantity integer */
 	public int getQuantity()
 	{
 		return this.quantity;
 	}
 	
+	/** Increases the quantity by the parameters amount
+	 * @param num Integer */
 	public void increaseQuantity(int num)
 	{
 		this.quantity = this.quantity + num;
 	}
 	
+	/** Decreases the quantity by the parameters amount
+	 * @param num Integer */
 	public void reduceQuantity(int num)
 	{
 		this.quantity = this.quantity - num;
 	}
-
 }

@@ -60,6 +60,10 @@ public class ShoppingCart {
 		System.out.println("");
 	}
 	
+	/** Adds item to cart taking in the item object, price and quantity 
+	 * @param object Object
+	 * @param price integer
+	 * @param quantity integer */
 	public void addItem(Object object, int price, int quantity) {
 		this.bill += price * quantity;
 		for (int i = 0; i < quantity; i++) 
@@ -74,6 +78,9 @@ public class ShoppingCart {
 		this.printBill();
 	}
 	
+	/** Removes item from cart taking in price and quantity 
+	 * @param itemName String
+	 * @param price integer */
 	public void removeItem(String itemName, int price) {
 		for (int i = 0; i < inCartArray.size(); i++)
 		{

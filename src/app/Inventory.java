@@ -3,14 +3,17 @@ package app;
 /** Class for Inventory */
 public class Inventory {
 
-	/** Create object of CopperSword stored in copperSword */
+	/** Create object for shop item RustySword*/
 	public Object rustySword = new RustySword();
+	/** Create object for shop item CopperSword*/
 	public Object copperSword = new CopperSword();
-	
+	/** Create object for shop item DustyCloak*/
 	public Object dustyCloak = new DustyCloak();
+	/** Create object for shop item ClothPants*/
 	public Object clothPants = new ClothPants();
-	
+	/** Create object for shop item SmallPotion*/
 	public Object smallPotion = new SmallPotion();
+	/** Create object for shop item MediumPotion*/
 	public Object mediumPotion = new MediumPotion();
 	
 	/** Create object of ShoppingCart stored in shoppingCart */
@@ -31,7 +34,7 @@ public class Inventory {
 	}
 	
 	/**  Output stream displaying the item description. If parameter is "back" no output stream. if item does not exist, output stream to tell user
-	 * @param item String.*/
+	 * @param object Object.*/
 	public void getItemDescription(Object object) {
 		if (object instanceof Weapon)
 		System.out.println("\n" + ((Weapon)object).getDescription() + "\n");
@@ -55,6 +58,10 @@ public class Inventory {
 		shoppingCart.checkout();
 	}
 	
+	/** Checks to see if the stock of the item is available using the requested quantity and the item object
+	 * @param object Object
+	 * @param quantity integer 
+	 * @return true/false boolean */
 	public boolean stockCheck(Object object, int quantity) {
 		if (quantity == 0) {
 			return false;
@@ -75,6 +82,9 @@ public class Inventory {
 		return false;
 	}
 	
+	/** Adds the item to cart by passing in the item object and quantity 
+	 * @param object object
+	 * @param quantity integer */
 	public void addItemtoCart(Object object, int quantity) {
 		if (object instanceof Weapon) {
 			((Weapon)object).reduceQuantity(quantity);
@@ -90,6 +100,10 @@ public class Inventory {
 		}
 	}
 	
+	/** Removes the item to cart by passing in the item object and quantity 
+	 * if item is not in cart, output stream tells user
+	 * @param object object
+	 * @param quantity integer */
 	public void removeItemFromCart(Object object, int quantity) {
 		if (object instanceof Weapon) {
 			if (shoppingCart.inCart(((Weapon)object).getName())) {
@@ -123,6 +137,9 @@ public class Inventory {
 		}
 	}
 	
+	/** Identifies item by using the string passed in and getting the item object
+	 * itemName String 
+	 * @return (itemName) object*/
 	public Object identifyItem(String itemName) {
 		if (itemName.equals("CopperSword"))
 			return copperSword;

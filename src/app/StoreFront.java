@@ -11,7 +11,6 @@ public class StoreFront {
 
 		// Create object of Inventory stored in inventory 
 		Inventory inventory = new Inventory();
-		ShoppingCart shoppingCart = new ShoppingCart();
 		// Variable name for Scanner 
 		Scanner scnr = new Scanner(System.in);
 		// Variable to control the REPL's 
@@ -22,9 +21,9 @@ public class StoreFront {
 		int quantity;
 		Object currentItem;
 		// Output streams to green the user 
-		System.out.println("\nWelcome to Grumbling Goblins Gladiator");
-		System.out.println("");
-		
+		System.out.println("\nWelcome to Grumbling Goblins Gladiator\n");
+
+		// Start of the game REPL
 		while (true) {
 			// Output streams to display REPL choices 
 			System.out.println("What would you like to do? ");
@@ -47,6 +46,7 @@ public class StoreFront {
 				System.out.print("Enter a items name to see its description or enter 'back': ");
 				// Reassign item variable with input from user to use next to get description of item 
 				item = scnr.next();
+				// Gets the object for the item
 				currentItem = inventory.identifyItem(item);
 				// invoke the .getItemDescription method from Inventory 
 				inventory.getItemDescription(currentItem);
@@ -60,17 +60,20 @@ public class StoreFront {
 				System.out.print("Enter the items name you wish to add: ");
 				// Reassign item variable with input from user to then do inventory and cart logics 
 				item = scnr.next();
+				// Gets the object for the item
 				currentItem = inventory.identifyItem(item);
 				// Output stream to prompt the user for how many of the item they want to buy 
 				System.out.print("Enter the amount you want to purchase: ");
 				// Reassign quantity variable with integer input to be then passed onto the Inventory method inventoryCheck 
 				quantity = scnr.nextInt();
-				// FIX COMMENT 
+				// Makes sure item is in stock 
 				if (inventory.stockCheck(currentItem, quantity)) {
+					// Adds item to cart
 					inventory.addItemtoCart(currentItem, quantity);
 				}
 			}
 			else if (choice == 3) {
+				// Prints cart
 				inventory.printCart();
 			}
 			// Check if REPL choice is 3 to do logic that removes item from the cart 
@@ -82,8 +85,9 @@ public class StoreFront {
 				System.out.print("Enter the items name you wish to remove: ");
 				// Reassign item variable with input from user to then use as a param on the removeItem method from Inventory 
 				item = scnr.next();
+				// Gets the object for the item
 				currentItem = inventory.identifyItem(item);
-				// FIX
+				// Removes item from cart, right now aways 1 at a time
 				inventory.removeItemFromCart(currentItem, 1);
 				
 			}
@@ -99,8 +103,7 @@ public class StoreFront {
 			else if (choice == 6) 
 			{
 				// Output stream to prompt Goodbye 
-				System.out.println("");
-				System.out.println("Goodbye Gladiator");
+				System.out.println("\nGoodbye Gladiator");
 				// Use Break keyword to end program as user selected Leave from the REPL
 				break;
 			}
