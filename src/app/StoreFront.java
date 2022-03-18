@@ -110,7 +110,7 @@ public class StoreFront {
 			// Output stream telling user their REPL selection was not valid */
 			else {
 				// Output stream to display Invalid selection 
-				System.out.println("\nInvalid selection");
+				System.out.println("\nInvalid selection\n");
 			}
 		
 		}

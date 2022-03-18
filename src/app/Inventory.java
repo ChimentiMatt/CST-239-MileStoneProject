@@ -4,17 +4,17 @@ package app;
 public class Inventory {
 
 	/** Create object for shop item RustySword*/
-	public Object rustySword = new RustySword();
+	private Object rustySword = new RustySword();
 	/** Create object for shop item CopperSword*/
-	public Object copperSword = new CopperSword();
+	private Object copperSword = new CopperSword();
 	/** Create object for shop item DustyCloak*/
-	public Object dustyCloak = new DustyCloak();
+	private Object dustyCloak = new DustyCloak();
 	/** Create object for shop item ClothPants*/
-	public Object clothPants = new ClothPants();
+	private Object clothPants = new ClothPants();
 	/** Create object for shop item SmallPotion*/
-	public Object smallPotion = new SmallPotion();
+	private Object smallPotion = new SmallPotion();
 	/** Create object for shop item MediumPotion*/
-	public Object mediumPotion = new MediumPotion();
+	private Object mediumPotion = new MediumPotion();
 	
 	/** Create object of ShoppingCart stored in shoppingCart */
 	ShoppingCart shoppingCart = new ShoppingCart();
@@ -37,10 +37,10 @@ public class Inventory {
 	 * @param object Object.*/
 	public void getItemDescription(Object object) {
 		if (object instanceof Weapon)
-		System.out.println("\n" + ((Weapon)object).getDescription() + "\n");
-		if (object instanceof Armor)
+			System.out.println("\n" + ((Weapon)object).getDescription() + "\n");
+		else if (object instanceof Armor)
 			System.out.println("\n" + ((Armor)object).getDescription() + "\n");
-		if (object instanceof Health)
+		else if (object instanceof Health)
 			System.out.println("\n" + ((Health)object).getDescription() + "\n");
 		else {
 			System.out.println("Invalid selection\n");
@@ -78,7 +78,7 @@ public class Inventory {
 			if (((Health)object).getQuantity() - quantity >= 0) 
 				return true;
 		}
-		System.out.println("\nInvalid amount\n");
+		System.out.println("\nInvalid selection\n");
 		return false;
 	}
 	
