@@ -11,6 +11,8 @@ public class StoreFront {
 
 		// Create object of Inventory stored in inventory 
 		Inventory inventory = new Inventory();
+		/** Create object of ShoppingCart stored in shoppingCart */
+		Object shoppingCart = new ShoppingCart();
 		// Variable name for Scanner 
 		Scanner scnr = new Scanner(System.in);
 		// Variable to control the REPL's 
@@ -69,35 +71,35 @@ public class StoreFront {
 				// Makes sure item is in stock 
 				if (inventory.stockCheck(currentItem, quantity)) {
 					// Adds item to cart
-					inventory.addItemtoCart(currentItem, quantity);
+					inventory.addItemtoCart(currentItem, quantity, shoppingCart);
 				}
 			}
 			else if (choice == 3) {
 				// Prints cart
-				inventory.printCart();
+				inventory.printCart(shoppingCart);
 			}
 			// Check if REPL choice is 3 to do logic that removes item from the cart 
 			else if (choice == 4) 
 			{
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
-				inventory.printCart();
+				inventory.printCart(shoppingCart);
 				// Output stream to prompt the user to name item with an input 
 				System.out.print("Enter the items name you wish to remove: ");
 				// Reassign item variable with input from user to then use as a param on the removeItem method from Inventory 
 				item = scnr.next();
 				// Gets the object for the item
 				currentItem = inventory.identifyItem(item);
-				// Removes item from cart, right now aways 1 at a time
-				inventory.removeItemFromCart(currentItem, 1);
+				// Removes item from cart, right now always 1 at a time
+				inventory.removeItemFromCart(currentItem, 1, shoppingCart);
 				
 			}
 			// Check if REPL choice is 4 to do logic that end the transaction or 'checkout.' 
 			else if (choice == 5) 
 			{
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
-				inventory.printCart();
+				inventory.printCart(shoppingCart);
 				// Invoke the .checkout() method from Inventory to handle logics of clearing out shopping cart and purchasing item 
-				inventory.checkout();
+				inventory.checkout(shoppingCart);
 			}
 			// Check if REPL choice is 5 output stream a goodbye message and break program 
 			else if (choice == 6) 

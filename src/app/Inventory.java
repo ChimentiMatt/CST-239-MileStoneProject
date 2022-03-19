@@ -16,9 +16,6 @@ public class Inventory {
 	/** Create object for shop item MediumPotion*/
 	private Object mediumPotion = new MediumPotion();
 	
-	/** Create object of ShoppingCart stored in shoppingCart */
-	ShoppingCart shoppingCart = new ShoppingCart();
-	
 	/**  Output stream displaying the item, price and available quantity */
 	public void getInventory() {
 		System.out.println("\nWe have the following in stock:");
@@ -48,14 +45,14 @@ public class Inventory {
 	}
 	
 	/** Output stream to tell the user their current bill and show the items in the cart */
-	public void printCart() {
-		System.out.println("\nYour current total is " + shoppingCart.getBill() + " copper");
-		shoppingCart.printCurrentCart();
+	public void printCart(Object cartObject) {
+		System.out.println("\nYour current total is " + ((ShoppingCart)cartObject).getBill() + " copper");
+		((ShoppingCart)cartObject).printCurrentCart();
 	}
 	
 	/** Invokes the checkout method in ShoppingCart */
-	public void checkout() {
-		shoppingCart.checkout();
+	public void checkout(Object cartObject) {
+		((ShoppingCart)cartObject).checkout();
 	}
 	
 	/** Checks to see if the stock of the item is available using the requested quantity and the item object
@@ -85,18 +82,18 @@ public class Inventory {
 	/** Adds the item to cart by passing in the item object and quantity 
 	 * @param object object
 	 * @param quantity integer */
-	public void addItemtoCart(Object object, int quantity) {
+	public void addItemtoCart(Object object, int quantity, Object cartObject) {
 		if (object instanceof Weapon) {
 			((Weapon)object).reduceQuantity(quantity);
-			shoppingCart.addItem(object, ((Weapon)object).getPrice(), quantity);
+			((ShoppingCart)cartObject).addItem(object, ((Weapon)object).getPrice(), quantity);
 		}
 		else if (object instanceof Armor) {
 			((Armor)object).reduceQuantity(quantity);
-			shoppingCart.addItem(object, ((Armor)object).getPrice(), quantity);
+			((ShoppingCart)cartObject).addItem(object, ((Armor)object).getPrice(), quantity);
 		}
 		else if (object instanceof Health) {
 			((Health)object).reduceQuantity(quantity);
-			shoppingCart.addItem(object, ((Health)object).getPrice(), quantity);
+			((ShoppingCart)cartObject).addItem(object, ((Health)object).getPrice(), quantity);
 		}
 	}
 	
@@ -104,29 +101,29 @@ public class Inventory {
 	 * if item is not in cart, output stream tells user
 	 * @param object object
 	 * @param quantity integer */
-	public void removeItemFromCart(Object object, int quantity) {
+	public void removeItemFromCart(Object object, int quantity, Object cartObject) {
 		if (object instanceof Weapon) {
-			if (shoppingCart.inCart(((Weapon)object).getName())) {
+			if (((ShoppingCart)cartObject).inCart(((Weapon)object).getName())) {
 				((Weapon)object).increaseQuantity(quantity);
-				shoppingCart.removeItem(((Weapon)object).getName(), ((Weapon)object).getPrice());
+				((ShoppingCart)cartObject).removeItem(((Weapon)object).getName(), ((Weapon)object).getPrice());
 			}
 			else {
 				System.out.println("\nYou do not have '" + ((Weapon)object).getName() + " in your current cart\n");
 			}
 		}
 		else if (object instanceof Armor) {
-			if (shoppingCart.inCart(((Armor)object).getName())) {
+			if (((ShoppingCart)cartObject).inCart(((Armor)object).getName())) {
 				((Armor)object).increaseQuantity(quantity);
-				shoppingCart.removeItem(((Armor)object).getName(), ((Armor)object).getPrice());
+				((ShoppingCart)cartObject).removeItem(((Armor)object).getName(), ((Armor)object).getPrice());
 			}
 			else {
 				System.out.println("\nYou do not have '" + ((Armor)object).getName() + " in your current cart\n");
 			}
 		}
 		else if (object instanceof Health) {
-			if (shoppingCart.inCart(((Health)object).getName())) {
+			if (((ShoppingCart)cartObject).inCart(((Health)object).getName())) {
 				((Health)object).increaseQuantity(quantity);
-				shoppingCart.removeItem(((Health)object).getName(), ((Health)object).getPrice());
+				((ShoppingCart)cartObject).removeItem(((Health)object).getName(), ((Health)object).getPrice());
 			}
 			else {
 				System.out.println("\nYou do not have '" + ((Health)object).getName() + " in your current cart\n");
