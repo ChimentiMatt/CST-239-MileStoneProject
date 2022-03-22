@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /** Class for RustySword */
 public class ShoppingCart {
 	/** Private ArrayList String Variable for items in cart */
-	private ArrayList<String> inCartArray = new ArrayList<String>();
+	private ArrayList<ItemInterface> inCartArray = new ArrayList<ItemInterface>();
 	/** Private integer Variable for bill due */
 	private int bill;
 	
@@ -27,7 +27,7 @@ public class ShoppingCart {
 	public boolean inCart(String item) {
 		for (int i = 0; i < inCartArray.size(); i++)
 		{
-			if (inCartArray.get(i).equals(item)) 
+			if (inCartArray.get(i).getName().equals(item)) 
 				return true;
 		}
 		return false;
@@ -46,7 +46,7 @@ public class ShoppingCart {
 		}
 		for (int i = 0; i < inCartArray.size(); i++)
 		{
-			System.out.println(i + 1 + ". " + inCartArray.get(i));
+			System.out.println(i + 1 + ". " + inCartArray.get(i).getName() + " \t\t " +  inCartArray.get(i).getPrice() + " copper");
 		}
 		System.out.println("");
 	}
@@ -69,11 +69,11 @@ public class ShoppingCart {
 		for (int i = 0; i < quantity; i++) 
 		{
 			if (object instanceof Weapon) 
-				this.inCartArray.add(((Weapon)object).getName());		
+				this.inCartArray.add((ItemInterface) object);		
 			else if (object instanceof Armor) 
-				this.inCartArray.add(((Armor)object).getName());		
+				this.inCartArray.add((ItemInterface) object);	
 			else if (object instanceof Health) 
-				this.inCartArray.add(((Health)object).getName());		
+				this.inCartArray.add((ItemInterface) object);
 		}
 		this.printBill();
 	}
@@ -84,8 +84,8 @@ public class ShoppingCart {
 	public void removeItem(String itemName, int price) {
 		for (int i = 0; i < inCartArray.size(); i++)
 		{
-			if( inCartArray.get(i).equals(itemName)) {
-				inCartArray.remove(itemName);
+			if( inCartArray.get(i).getName().equals(itemName)) {
+				inCartArray.remove(inCartArray.get(i));
 				this.bill -= price;
 				System.out.println("Removed from cart");
 				System.out.println("");
@@ -93,5 +93,4 @@ public class ShoppingCart {
 			}	
 		}
 	}
-	
 }

@@ -20,8 +20,8 @@ public class Inventory {
 	public void getInventory() {
 		System.out.println("\nWe have the following in stock:");
 		System.out.println("\nWeapons:");
-		System.out.println("  - " + ((RustySword)rustySword).getName() + " at " + ((RustySword)rustySword).getPrice() + " copper each " + "		(stock " +((RustySword)rustySword).getQuantity() + ")" );
-		System.out.println("  - " + ((CopperSword)copperSword).getName() + " at " + ((CopperSword)copperSword).getPrice() + " copper each " + "		(stock " +((CopperSword)copperSword).getQuantity() + ")" );
+		System.out.println("  - " + ((RustySword)rustySword).getName() + " at " + ((RustySword)rustySword).getPrice() + " copper each " + "		(stock " + ((RustySword)rustySword).getQuantity() + ")" );
+		System.out.println("  - " + ((CopperSword)copperSword).getName() + " at " + ((CopperSword)copperSword).getPrice() + " copper each " + "		(stock " + ((CopperSword)copperSword).getQuantity() + ")" );
 		System.out.println("Armors:");
 		System.out.println("  - " + ((DustyCloak)dustyCloak).getName() + " at " + ((DustyCloak)dustyCloak).getPrice() + " copper each " + "		(stock " +((DustyCloak)dustyCloak).getQuantity() + ")" );
 		System.out.println("  - " + ((ClothPants)clothPants).getName() + " at " + ((ClothPants)clothPants).getPrice() + " copper each " + "		(stock " +((ClothPants)clothPants).getQuantity() + ")" );
@@ -34,7 +34,7 @@ public class Inventory {
 	 * @param object Object.*/
 	public void getItemDescription(Object object) {
 		if (object instanceof Weapon)
-			System.out.println("\n" + ((Weapon)object).getDescription() + "\n");
+			System.out.println("\n" + ((ItemInterface)object).getDescription() + "\n");
 		else if (object instanceof Armor)
 			System.out.println("\n" + ((Armor)object).getDescription() + "\n");
 		else if (object instanceof Health)
@@ -138,10 +138,10 @@ public class Inventory {
 	 * @param itemName String 
 	 * @return (itemName) object*/
 	public Object identifyItem(String itemName) {
-		if (itemName.equals("CopperSword"))
-			return copperSword;
-		else if (itemName.equals("RustySword"))
+		if (itemName.equals("RustySword"))
 			return rustySword;
+		else if (itemName.equals("CopperSword"))
+			return copperSword;
 		else if (itemName.equals("DustyCloak"))
 			return dustyCloak;	
 		else if (itemName.equals("ClothPants"))
