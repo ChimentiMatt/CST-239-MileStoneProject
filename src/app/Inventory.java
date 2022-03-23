@@ -27,7 +27,7 @@ public class Inventory {
 		System.out.println("  - " + ((ClothPants)clothPants).getName() + " at " + ((ClothPants)clothPants).getPrice() + " copper each " + "		(stock " +((ClothPants)clothPants).getQuantity() + ")" );
 		System.out.println("Potions:");
 		System.out.println("  - " + ((SmallPotion)smallPotion).getName() + " at " + ((SmallPotion)smallPotion).getPrice() + " copper each " + "		(stock " +((SmallPotion)smallPotion).getQuantity() + ")" );
-		System.out.println("  - " + ((MediumPotion)mediumPotion).getName() + " at " + ((MediumPotion)mediumPotion).getPrice() + " copper each " + "		(stock " +((MediumPotion)mediumPotion).getQuantity() + ")\n" );
+			System.out.println("  - " + ((MediumPotion)mediumPotion).getName() + " at " + ((MediumPotion)mediumPotion).getPrice() + " copper each " + "		(stock " +((MediumPotion)mediumPotion).getQuantity() + ")\n" );
 	}
 	
 	/**  Output stream displaying the item description. If parameter is "back" no output stream. if item does not exist, output stream to tell user
@@ -44,13 +44,15 @@ public class Inventory {
 		}
 	}
 	
-	/** Output stream to tell the user their current bill and show the items in the cart */
+	/** Output stream to tell the user their current bill and show the items in the cart
+	 * @param cartObject Object */
 	public void printCart(Object cartObject) {
 		System.out.println("\nYour current total is " + ((ShoppingCart)cartObject).getBill() + " copper");
 		((ShoppingCart)cartObject).printCurrentCart();
 	}
 	
-	/** Invokes the checkout method in ShoppingCart */
+	/** Invokes the checkout method in ShoppingCart 
+	 * @param cartObject Object */
 	public void checkout(Object cartObject) {
 		((ShoppingCart)cartObject).checkout();
 	}
@@ -80,8 +82,9 @@ public class Inventory {
 	}
 	
 	/** Adds the item to cart by passing in the item object and quantity 
-	 * @param object object
-	 * @param quantity integer */
+	 * @param object Object
+	 * @param quantity integer
+	 * @param cartObject Object */
 	public void addItemtoCart(Object object, int quantity, Object cartObject) {
 		if (object instanceof Weapon) {
 			((Weapon)object).reduceQuantity(quantity);
@@ -100,7 +103,8 @@ public class Inventory {
 	/** Removes the item to cart by passing in the item object and quantity 
 	 * if item is not in cart, output stream tells user
 	 * @param object object
-	 * @param quantity integer */
+	 * @param quantity integer 
+	 * @param cartObject Object */
 	public void removeItemFromCart(Object object, int quantity, Object cartObject) {
 		if (object instanceof Weapon) {
 			if (((ShoppingCart)cartObject).inCart(((Weapon)object).getName())) {
@@ -136,7 +140,7 @@ public class Inventory {
 	
 	/** Identifies item by using the string passed in and getting the item object
 	 * @param itemName String 
-	 * @return (itemName) object*/
+	 * @return (itemName) object */
 	public Object identifyItem(String itemName) {
 		if (itemName.equals("RustySword"))
 			return rustySword;

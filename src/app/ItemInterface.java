@@ -1,5 +1,6 @@
 package app;
 
+/** class ItemInterface that is the interface for different item types */
 public interface ItemInterface 
 {
 	public String getName();
@@ -11,5 +12,4 @@ public interface ItemInterface
 	public int getAttackPower();
 	public void increaseQuantity(int num);
 	public void reduceQuantity(int num);
-
 }

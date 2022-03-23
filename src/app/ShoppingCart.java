@@ -3,14 +3,16 @@ package app;
 import java.util.ArrayList;
 
 /** Class for RustySword */
-public class ShoppingCart {
+public class ShoppingCart 
+{
 	/** Private ArrayList String Variable for items in cart */
 	private ArrayList<ItemInterface> inCartArray = new ArrayList<ItemInterface>();
 	/** Private integer Variable for bill due */
 	private int bill;
 	
 	/** Constructor to initialize bill */
-	ShoppingCart() {
+	ShoppingCart() 
+	{
 		this.bill = 0;
 	}
 	
@@ -24,7 +26,8 @@ public class ShoppingCart {
 	 * loops over cart inCartArray, if element equals item, return true, if no items match, return false
 	 * @param item String
 	 * @return true if item parameter is in shopping cart or false if item parameter is not in shopping cart. */
-	public boolean inCart(String item) {
+	public boolean inCart(String item) 
+	{
 		for (int i = 0; i < inCartArray.size(); i++)
 		{
 			if (inCartArray.get(i).getName().equals(item)) 
@@ -34,7 +37,8 @@ public class ShoppingCart {
 	}
 	
 	/** Output stream to display to user their bill by invoking .getBill */
-	public void printBill(){
+	public void printBill()
+	{
 		System.out.println("Your total bill is " + this.getBill() + " copper");
 		System.out.println("");
 	}
@@ -64,7 +68,8 @@ public class ShoppingCart {
 	 * @param object Object
 	 * @param price integer
 	 * @param quantity integer */
-	public void addItem(Object object, int price, int quantity) {
+	public void addItem(Object object, int price, int quantity) 
+	{
 		this.bill += price * quantity;
 		for (int i = 0; i < quantity; i++) 
 		{
@@ -81,7 +86,8 @@ public class ShoppingCart {
 	/** Removes item from cart taking in price and quantity 
 	 * @param itemName String
 	 * @param price integer */
-	public void removeItem(String itemName, int price) {
+	public void removeItem(String itemName, int price) 
+	{
 		for (int i = 0; i < inCartArray.size(); i++)
 		{
 			if( inCartArray.get(i).getName().equals(itemName)) {

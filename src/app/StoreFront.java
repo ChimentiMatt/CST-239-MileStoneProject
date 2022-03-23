@@ -6,7 +6,7 @@ import java.util.Scanner;
 /** Class for StoreFront */
 public class StoreFront {
 	/** This is the main method for a program that is a RPG's item shop
-	 * @param args*/
+	 * @param args String[]*/
 	public static void main(String[] args) {
 
 		// Create object of Inventory stored in inventory 
@@ -74,11 +74,12 @@ public class StoreFront {
 					inventory.addItemtoCart(currentItem, quantity, shoppingCart);
 				}
 			}
+			// Check if REPL choice is 3 to show what currently is in the cart
 			else if (choice == 3) {
 				// Prints cart
 				inventory.printCart(shoppingCart);
 			}
-			// Check if REPL choice is 3 to do logic that removes item from the cart 
+			// Check if REPL choice is 4 to do logic that removes item from the cart 
 			else if (choice == 4) 
 			{
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
@@ -93,7 +94,7 @@ public class StoreFront {
 				inventory.removeItemFromCart(currentItem, 1, shoppingCart);
 				
 			}
-			// Check if REPL choice is 4 to do logic that end the transaction or 'checkout.' 
+			// Check if REPL choice is 5 to do logic that end the transaction or 'checkout.' 
 			else if (choice == 5) 
 			{
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
@@ -101,7 +102,7 @@ public class StoreFront {
 				// Invoke the .checkout() method from Inventory to handle logics of clearing out shopping cart and purchasing item 
 				inventory.checkout(shoppingCart);
 			}
-			// Check if REPL choice is 5 output stream a goodbye message and break program 
+			// Check if REPL choice is 6 output stream a goodbye message and break program 
 			else if (choice == 6) 
 			{
 				// Output stream to prompt Goodbye 
