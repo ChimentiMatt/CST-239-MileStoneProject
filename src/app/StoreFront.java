@@ -88,7 +88,7 @@ public class StoreFront {
 				// Output stream to prompt the user to name item with an input 
 				System.out.print("Enter the items name you wish to remove: ");
 				// Reassign item variable with input from user to then use as a parameter on the removeItem method from Inventory 
-				item = scnr.next();
+				item = scnr.next().toLowerCase();
 				// Gets the object for the item
 				currentItem = inventory.identifyItem(item);
 				// Removes item from cart, right now always 1 at a time
