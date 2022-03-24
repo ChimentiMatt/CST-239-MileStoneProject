@@ -27,10 +27,10 @@ public class Inventory {
 		System.out.println("  - " + ((ClothPants)clothPants).getName() + " at " + ((ClothPants)clothPants).getPrice() + " copper each " + "		(stock " +((ClothPants)clothPants).getQuantity() + ")" );
 		System.out.println("Potions:");
 		System.out.println("  - " + ((SmallPotion)smallPotion).getName() + " at " + ((SmallPotion)smallPotion).getPrice() + " copper each " + "		(stock " +((SmallPotion)smallPotion).getQuantity() + ")" );
-			System.out.println("  - " + ((MediumPotion)mediumPotion).getName() + " at " + ((MediumPotion)mediumPotion).getPrice() + " copper each " + "		(stock " +((MediumPotion)mediumPotion).getQuantity() + ")\n" );
+		System.out.println("  - " + ((MediumPotion)mediumPotion).getName() + " at " + ((MediumPotion)mediumPotion).getPrice() + " copper each " + "		(stock " +((MediumPotion)mediumPotion).getQuantity() + ")\n" );
 	}
 	
-	/**  Output stream displaying the item description. If parameter is "back" no output stream. if item does not exist, output stream to tell user
+	/**  Output stream displaying the item description. If invalid selection, output stream tells user
 	 * @param object Object.*/
 	public void getItemDescription(Object object) {
 		if (object instanceof Weapon)

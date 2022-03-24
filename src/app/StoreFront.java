@@ -39,7 +39,7 @@ public class StoreFront {
 			// Assign choice from user input to control REPL 
 			choice = scnr.nextInt();
 			
-			// Check if REPL choice is 1 to do inventory logics 
+			// Check if REPL choice is 1 to show inventory and potentially description of item
 			if (choice == 1) 
 			{
 				// invoke the .getInventory method from Inventory to Output Stream the available inventory
@@ -76,7 +76,7 @@ public class StoreFront {
 			}
 			// Check if REPL choice is 3 to show what currently is in the cart
 			else if (choice == 3) {
-				// Prints cart
+				// Output streams cart objects
 				inventory.printCart(shoppingCart);
 			}
 			// Check if REPL choice is 4 to do logic that removes item from the cart 

@@ -3,7 +3,6 @@ package app;
 /** Class Health implements ItemInterface */
 public class Health implements ItemInterface
 {
-	
 	protected String name;
 	protected String description;
 	protected int price;
@@ -12,7 +11,7 @@ public class Health implements ItemInterface
 	protected int healingPower;
 	protected int attackPower;
 	
-	/** Constructor to initialize Weapon from subclasses
+	/** Constructor to initialize Health from subclasses
 	 * @param name String
 	 * @param description String
 	 * @param price integer
