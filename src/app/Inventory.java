@@ -1,5 +1,7 @@
 package app;
 
+import java.util.Arrays;
+
 /** Class for Inventory */
 public class Inventory {
 
@@ -15,19 +17,17 @@ public class Inventory {
 	private Object smallPotion = new SmallPotion();
 	/** Create object for shop item MediumPotion*/
 	private Object mediumPotion = new MediumPotion();
-	
-	/**  Output stream displaying the item, price and available quantity */
+	/** Create an array for all available weapons */
+
+	/**  Output stream displaying the item, price and available quantity.*/
 	public void getInventory() {
-		System.out.println("\nWe have the following in stock:");
+		System.out.println("\nWe have the following in stock Gladiator:");
 		System.out.println("\nWeapons:");
-		System.out.println("  - " + ((RustySword)rustySword).getName() + " at " + ((RustySword)rustySword).getPrice() + " copper each " + "		(stock " + ((RustySword)rustySword).getQuantity() + ")" );
-		System.out.println("  - " + ((CopperSword)copperSword).getName() + " at " + ((CopperSword)copperSword).getPrice() + " copper each " + "		(stock " + ((CopperSword)copperSword).getQuantity() + ")" );
+		this.getWeaponList();
 		System.out.println("Armors:");
-		System.out.println("  - " + ((DustyCloak)dustyCloak).getName() + " at " + ((DustyCloak)dustyCloak).getPrice() + " copper each " + "		(stock " +((DustyCloak)dustyCloak).getQuantity() + ")" );
-		System.out.println("  - " + ((ClothPants)clothPants).getName() + " at " + ((ClothPants)clothPants).getPrice() + " copper each " + "		(stock " +((ClothPants)clothPants).getQuantity() + ")" );
+		this.getArmorList();
 		System.out.println("Potions:");
-		System.out.println("  - " + ((SmallPotion)smallPotion).getName() + " at " + ((SmallPotion)smallPotion).getPrice() + " copper each " + "		(stock " +((SmallPotion)smallPotion).getQuantity() + ")" );
-		System.out.println("  - " + ((MediumPotion)mediumPotion).getName() + " at " + ((MediumPotion)mediumPotion).getPrice() + " copper each " + "		(stock " +((MediumPotion)mediumPotion).getQuantity() + ")\n" );
+		this.getHealthList();
 	}
 	
 	/**  Output stream displaying the item description. If invalid selection, output stream tells user
@@ -144,19 +144,64 @@ public class Inventory {
 	public Object identifyItem(String itemName) {
 		if (itemName.equals("RustySword"))
 			return rustySword;
-		else if (itemName.equals("CopperSword"))
+		else if (itemName.equals("coppersword"))
 			return copperSword;
-		else if (itemName.equals("DustyCloak"))
+		else if (itemName.equals("dustycloak"))
 			return dustyCloak;	
-		else if (itemName.equals("ClothPants"))
+		else if (itemName.equals("clothpants"))
 			return clothPants;		
-		else if (itemName.equals("SmallPotion"))
+		else if (itemName.equals("smallpotion"))
 			return smallPotion;		
-		else if (itemName.equals("MediumPotion"))
+		else if (itemName.equals("mediumpotion"))
 			return mediumPotion;		
 		else {			
 			return null;
 		}
+	}
+	
+	/** Sort the weapons item alphabetically by invoking Arrays.sort which then uses the compareTo method that has been overwritten  
+	 * then output streams the result */
+	public void getWeaponList() {
+		Weapon[] weapon = new Weapon[2];
+		weapon[0] = new Weapon("RustySword", "Attack Power: 1. A sword for those low on copper", 3, 99, 0, 0, 2);
+		weapon[1] = new Weapon("CopperSword", "Attack Power: 3. It's a very impractical metal for a weapon", 8, 99, 0, 0, 5);
+
+		Arrays.sort(weapon);
+		for (int i = 0; i < 2; i++)
+		{
+			System.out.println(weapon[i].getName() + "\t" + weapon[i].getPrice() + " copper");
+		}
+		System.out.println("");
+	}
+	
+	/** Sort the armors item alphabetically by invoking Arrays.sort which then uses the compareTo method that has been overwritten  
+	 * then output streams the result */
+	public void getArmorList() {
+		Armor[] armor = new Armor[2];
+		armor[0] = new Armor("ClothPants", "Defense: 1. Pants not even good enough to stop a cold breeze ", 1, 10, 2, 0, 0);
+		armor[1] = new Armor("DustyCloak", "Defense: 3. It's old and it does not smell right", 3, 10, 3, 0, 0);
+
+		Arrays.sort(armor);
+		for (int i = 0; i < 2; i++)
+		{
+			System.out.println(armor[i].getName() + "\t" + armor[i].getPrice() + " copper");
+		}
+		System.out.println("");
+	}
+	
+	/** Sort the health items alphabetically by invoking Arrays.sort which then uses the compareTo method that has been overwritten 
+	 * then output streams the result  */
+	public void getHealthList() {
+		Health[] health = new Health[2];
+		health[0] = new Health("SmallPotion", "Heals: 15 hp. It has an odd smell and uncanny bubbles but mends minor wounds", 4, 25, 0, 15, 0);
+		health[1] = new Health("MediumPotion", "Heals: 40hp. If it didnt save your life, you wouldn't drink something so vile", 10, 20, 0, 40, 0);
+
+		Arrays.sort(health);
+		for (int i = 0; i < 2; i++)
+		{
+			System.out.println(health[i].getName() + "\t" + health[i].getPrice() + " copper");
+		}
+		System.out.println("");
 	}
 	
 }

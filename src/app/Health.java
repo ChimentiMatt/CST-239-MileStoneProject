@@ -1,7 +1,7 @@
 package app;
 
 /** Class Health implements ItemInterface */
-public class Health implements ItemInterface
+public class Health implements ItemInterface, Comparable<Health>
 {
 	protected String name;
 	protected String description;
@@ -93,6 +93,19 @@ public class Health implements ItemInterface
 	public void reduceQuantity(int num) {
 		this.quantity = this.quantity - num;
 	}
-
+	
+	/** Override method to be used with sort. Sorts by alphabetical order
+	* @param weapon Weapon */
+	@Override
+	public int compareTo(Health health) 
+	{
+		int value = this.getName().toUpperCase().compareTo(health.getName().toUpperCase());
+		if (value == 0)
+		{
+			return  this.getName().toUpperCase().compareTo(health.getName().toUpperCase());
+		}
+		else 
+			return value;
+	}
 	
 }

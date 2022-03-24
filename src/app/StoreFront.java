@@ -29,7 +29,7 @@ public class StoreFront {
 		while (true) {
 			// Output streams to display REPL choices 
 			System.out.println("What would you like to do? ");
-			System.out.println("1: View stock ");
+			System.out.println("1: View items by type and description");
 			System.out.println("2: Add Item to cart ");
 			System.out.println("3: View your cart ");
 			System.out.println("4: Remove item from cart ");
@@ -47,12 +47,13 @@ public class StoreFront {
 				// Output streams to prompt the user to go back or name an item to see the description 
 				System.out.print("Enter a items name to see its description or enter 'back': ");
 				// Reassign item variable with input from user to use next to get description of item 
-				item = scnr.next();
+				item = scnr.next().toLowerCase();
 				// Gets the object for the item
 				currentItem = inventory.identifyItem(item);
-				// invoke the .getItemDescription method from Inventory 
+				// Invoke the .getItemDescription method from Inventory 
 				inventory.getItemDescription(currentItem);
 			}
+			
 			// Check if REPL choice is 2 to do logic that places item in cart 
 			else if (choice == 2)
 			{
@@ -86,7 +87,7 @@ public class StoreFront {
 				inventory.printCart(shoppingCart);
 				// Output stream to prompt the user to name item with an input 
 				System.out.print("Enter the items name you wish to remove: ");
-				// Reassign item variable with input from user to then use as a param on the removeItem method from Inventory 
+				// Reassign item variable with input from user to then use as a parameter on the removeItem method from Inventory 
 				item = scnr.next();
 				// Gets the object for the item
 				currentItem = inventory.identifyItem(item);

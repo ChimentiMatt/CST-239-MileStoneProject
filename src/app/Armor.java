@@ -1,7 +1,7 @@
 package app;
 
 /** Class Armor that implements ItemInterface */
-public class Armor implements ItemInterface
+public class Armor implements ItemInterface, Comparable<Armor>
 {
 	protected String name;
 	protected String description;
@@ -93,6 +93,19 @@ public class Armor implements ItemInterface
 	public void reduceQuantity(int num) {
 		this.quantity = this.quantity - num;
 		
+	}
+	
+	/** Override method to be used with sort. Sorts by alphabetical order
+	* @param armor Armor */
+	@Override
+	public int compareTo(Armor armor) {
+		int value = this.getName().toUpperCase().compareTo(armor.getName().toUpperCase());
+		if (value == 0)
+		{
+			return  this.getName().toUpperCase().compareTo(armor.getName().toUpperCase());
+		}
+		else 
+			return value;
 	}
 
 }

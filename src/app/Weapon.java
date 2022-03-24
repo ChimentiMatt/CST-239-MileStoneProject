@@ -1,7 +1,7 @@
 package app;
 
 /** Class Weapon implements ItemInterface */
-public class Weapon implements ItemInterface
+public class Weapon implements ItemInterface, Comparable<Weapon>
 {
 	protected String name;
 	protected String description;
@@ -92,5 +92,19 @@ public class Weapon implements ItemInterface
 	@Override
 	public void reduceQuantity(int num) {
 		this.quantity = this.quantity - num;
+	}
+
+	/** Override method to be used with sort. Sorts by alphabetical order
+	* @param weapon Weapon */
+	@Override
+	public int compareTo(Weapon weapon) 
+	{
+		int value = this.getName().toUpperCase().compareTo(weapon.getName().toUpperCase());
+		if (value == 0)
+		{
+			return  this.getName().toUpperCase().compareTo(weapon.getName().toUpperCase());
+		}
+		else 
+			return value;
 	}
 }
