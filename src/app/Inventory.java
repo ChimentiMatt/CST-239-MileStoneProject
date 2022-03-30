@@ -2,6 +2,15 @@ package app;
 
 import java.util.Arrays;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /** Class for Inventory */
 public class Inventory {
 
@@ -17,18 +26,124 @@ public class Inventory {
 	private Object smallPotion = new SmallPotion();
 	/** Create object for shop item MediumPotion*/
 	private Object mediumPotion = new MediumPotion();
-	/** Create an array for all available weapons */
+	
+	/** Create an ArrayList for ItemInterface to be used with reading and writing the file */
+	static ArrayList<ItemInterface> updatedArray = new ArrayList<ItemInterface>();
+	
+	
+	public void updateInventory(Object object, int number, String itemName) {
+		updatedArray.clear();
+		
+		ArrayList<ItemInterface> itemArray = readFromFile("inventory.txt");
+		for(ItemInterface loopItem : itemArray)
+		{
+			if (loopItem.getName().toLowerCase().equals(itemName.toLowerCase()))
+			{
+				loopItem.reduceQuantity(number);
+				updatedArray.add(loopItem);
+			}
+			else {
+				updatedArray.add(loopItem);
+			}
+		}
+
+		for(int i = 0; i < updatedArray.size(); i++)
+		{
+			System.out.println("DEBUG PRINT" + updatedArray.get(i).getName() + "\t" + updatedArray.get(i).getQuantity() );
+		}
+
+	}
+	
 
 	/**  Output stream displaying the item, price and available quantity.*/
 	public void getInventory() {
 		System.out.println("\nWe have the following in stock Gladiator:");
-		System.out.println("\nWeapons:");
-		this.getWeaponList();
-		System.out.println("Armors:");
-		this.getArmorList();
-		System.out.println("Potions:");
-		this.getHealthList();
+		
+		ArrayList<ItemInterface> itemArray = readFromFile("inventory.txt");
+
+		if (updatedArray.size() == 0)
+		{
+			for(ItemInterface loopItem : itemArray)
+			{
+//				String text = loopItem.getName() + " \t\t stock: " + loopItem.getQuantity();
+				System.out.println(loopItem.getName() + " \t\t stock: " + loopItem.getQuantity());
+			}
+		}
+		else {
+			for(int i = 0; i < updatedArray.size(); i++)
+			{
+				System.out.println(updatedArray.get(i).getName() + "\t\t stock: " + updatedArray.get(i).getQuantity() );
+			}
+		}
+		
 	}
+	
+	public static void saveToFile(String fileName, boolean append)
+	{
+		PrintWriter pw;
+		
+		try
+		{
+			// Create a file File to 
+			File file = new File(fileName);
+			
+			FileWriter fw = new FileWriter(file, false);
+			pw = new PrintWriter(fw);
+			
+			System.out.println("here: ");
+			
+			// Write items into JSON
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = "";
+			for(ItemInterface loopItem : updatedArray)
+			{
+//				System.out.println( loopItem.getName() + " " + loopItem.getQuantity());
+				json += objectMapper.writeValueAsString(loopItem) + "\n";
+			}
+			pw.println(json);
+			
+			// Cleanup
+			pw.close();
+			
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public static ArrayList<ItemInterface> readFromFile(String filename)
+	{
+		ArrayList<ItemInterface> items = new ArrayList<ItemInterface>();
+		try 
+		{
+			// Open the file File to read
+			File file = new File(filename);
+			Scanner scnr = new Scanner(file);
+			
+			// Create list of Items by reading JSON file
+			while(scnr.hasNext())
+			{
+				// Read a string of JSON and convert to a item
+				String json = scnr.nextLine();
+				ObjectMapper objectMapper = new ObjectMapper();
+				RustySword item = objectMapper.readValue(json, RustySword.class);
+				items.add(item);
+			}
+			
+			// Cleanup
+			scnr.close();
+		}
+		catch(IOException e)
+		{
+			// Print Exception
+			e.printStackTrace();
+		}
+		return items;
+		
+	}
+	
 	
 	/**  Output stream displaying the item description. If invalid selection, output stream tells user
 	 * @param object Object.*/
@@ -142,7 +257,7 @@ public class Inventory {
 	 * @param itemName String 
 	 * @return (itemName) object */
 	public Object identifyItem(String itemName) {
-		if (itemName.equals("custysword"))
+		if (itemName.equals("rustysword"))
 			return rustySword;
 		else if (itemName.equals("coppersword"))
 			return copperSword;

@@ -1,4 +1,5 @@
 package app;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**@author Matthew Chimenti chimcode@gmail.com */
@@ -22,9 +23,10 @@ public class StoreFront {
 		// Variable to store quantity of items 
 		int quantity;
 		Object currentItem;
+		
 		// Output streams to green the user 
 		System.out.println("\nWelcome to Grumbling Goblins Gladiator\n");
-
+			
 		// Start of the game REPL
 		while (true) {
 			// Output streams to display REPL choices 
@@ -67,12 +69,16 @@ public class StoreFront {
 				currentItem = inventory.identifyItem(item);
 				// Output stream to prompt the user for how many of the item they want to buy 
 				System.out.print("Enter the amount you want to purchase: ");
+				
+				
 				// Reassign quantity variable with integer input to be then passed onto the Inventory method inventoryCheck 
 				quantity = scnr.nextInt();
 				// Makes sure item is in stock 
 				if (inventory.stockCheck(currentItem, quantity)) {
 					// Adds item to cart
 					inventory.addItemtoCart(currentItem, quantity, shoppingCart);
+					// Update .txt
+					inventory.updateInventory(currentItem, quantity, item);
 				}
 			}
 			// Check if REPL choice is 3 to show what currently is in the cart
@@ -94,10 +100,14 @@ public class StoreFront {
 				// Removes item from cart, right now always 1 at a time
 				inventory.removeItemFromCart(currentItem, 1, shoppingCart);
 				
+				inventory.updateInventory(currentItem, -1, item);
+				
 			}
 			// Check if REPL choice is 5 to do logic that end the transaction or 'checkout.' 
 			else if (choice == 5) 
 			{
+				
+				inventory.saveToFile("inventory.txt", true);
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
 				inventory.printCart(shoppingCart);
 				// Invoke the .checkout() method from Inventory to handle logics of clearing out shopping cart and purchasing item 
@@ -116,9 +126,6 @@ public class StoreFront {
 				// Output stream to display Invalid selection 
 				System.out.println("\nInvalid selection\n");
 			}
-		
 		}
 	}
-	
-
 }

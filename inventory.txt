@@ -1,0 +1,7 @@
+{"name":"RustySword","description":"Attack Power: 1. A sword for those low on copper","price":3,"quantity":76,"defense":0,"healingPower":0,"attackPower":2}
+{"name":"CopperSword","description":"Attack Power: 3. It's a very impractical metal for a weapon","price":8,"quantity":97,"defense":0,"healingPower":0,"attackPower":5}
+{"name":"ClothPants","description":"Defense: 1. Pants not even good enough to stop a cold breeze ","price":1,"quantity":10,"defense":2,"healingPower":0,"attackPower":0}
+{"name":"DustyCloak","description":"Defense: 3. It's old and it does not smell right","price":3,"quantity":10,"defense":3,"healingPower":0,"attackPower":0}
+{"name":"SmallPotion","description":"Heals: 15 hp. It has an odd smell and uncanny bubbles but mends minor wounds","price":4,"quantity":25,"defense":0,"healingPower":15,"attackPower":0}
+{"name":"MediumPotion","description":"Heals: 40hp. If it didnt save your life, you wouldn't drink something so vile","price":10,"quantity":20,"defense":0,"healingPower":40,"attackPower":0}
+
