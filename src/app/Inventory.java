@@ -30,42 +30,97 @@ public class Inventory {
 	/** Create an ArrayList for ItemInterface to be used with reading and writing the file */
 	static ArrayList<ItemInterface> updatedArray = new ArrayList<ItemInterface>();
 	
-	
 	public void updateInventory(Object object, int number, String itemName) {
 		updatedArray.clear();
 		
-		ArrayList<ItemInterface> itemArray = readFromFile("inventory.txt");
+		ArrayList<ItemInterface> itemArray = new ArrayList<ItemInterface>();
+		
+		try {
+			// Open the file File to read
+			File file = new File("inventory.json");
+			Scanner s = new Scanner(file);
+		
+			
+			// Create list of Cars by reading JSON file
+			while(s.hasNext())
+			{
+				// Read a string of JSON and convert to a Car
+				String json = s.nextLine();
+				ObjectMapper objectMapper = new ObjectMapper();
+				RustySword item = objectMapper.readValue(json,  RustySword.class);
+				itemArray.add(item);
+			}
+			s.close();
+		}
+		catch(IOException e)
+		{
+			// Print exception
+			// Discussion: what is wrong with this code?
+			e.printStackTrace();
+		}
+		
+//		ArrayList<ItemInterface> itemArray = readFromFile("inventory.json");
 		for(ItemInterface loopItem : itemArray)
 		{
+			
 			if (loopItem.getName().toLowerCase().equals(itemName.toLowerCase()))
 			{
 				loopItem.reduceQuantity(number);
 				updatedArray.add(loopItem);
 			}
 			else {
+				
 				updatedArray.add(loopItem);
+				
 			}
 		}
 
-		for(int i = 0; i < updatedArray.size(); i++)
-		{
-			System.out.println("DEBUG PRINT" + updatedArray.get(i).getName() + "\t" + updatedArray.get(i).getQuantity() );
-		}
+		saveToFile("", true);
+//		for(int i = 0; i < updatedArray.size(); i++)
+//		{
+//			System.out.println("DEBUG PRINT" + updatedArray.get(i).getName() + "\t" + updatedArray.get(i).getQuantity() );
+//		}
 
 	}
 	
 
-	/**  Output stream displaying the item, price and available quantity.*/
-	public void getInventory() {
-		System.out.println("\nWe have the following in stock Gladiator:");
+	/**  Output stream displaying the item, price and available quantity.
+	 * @throws IOException */
+	public void getInventory() throws IOException 
+	{
+		ArrayList<ItemInterface> itemArray = new ArrayList<ItemInterface>();
 		
-		ArrayList<ItemInterface> itemArray = readFromFile("inventory.txt");
+		try {
+			// Open the file File to read
+			File file = new File("inventory.json");
+			Scanner s = new Scanner(file);
+		
+			
+			// Create list of Cars by reading JSON file
+			while(s.hasNext())
+			{
+				// Read a string of JSON and convert to an item
+				String json = s.nextLine();
+				ObjectMapper objectMapper = new ObjectMapper();
+				RustySword item = objectMapper.readValue(json,  RustySword.class);
+				itemArray.add(item);
+			}
+			s.close();
+		}
+		catch(IOException e)
+		{
+			// Print exception
+			// Discussion: what is wrong with this code?
+			e.printStackTrace();
+		}
 
+//		ArrayList<ItemInterface> itemArray = readFromFile("inventory.json");
+//
 		if (updatedArray.size() == 0)
 		{
 			for(ItemInterface loopItem : itemArray)
 			{
-//				String text = loopItem.getName() + " \t\t stock: " + loopItem.getQuantity();
+				//	String text = loopItem.getName() + " \t\t stock: " + loopItem.getQuantity();
 				System.out.println(loopItem.getName() + " \t\t stock: " + loopItem.getQuantity());
 			}
 		}
@@ -85,19 +140,18 @@ public class Inventory {
 		try
 		{
 			// Create a file File to 
-			File file = new File(fileName);
+			File file = new File("inventory.json");
 			
 			FileWriter fw = new FileWriter(file, false);
 			pw = new PrintWriter(fw);
 			
-			System.out.println("here: ");
 			
 			// Write items into JSON
 			ObjectMapper objectMapper = new ObjectMapper();
 			String json = "";
 			for(ItemInterface loopItem : updatedArray)
 			{
-//				System.out.println( loopItem.getName() + " " + loopItem.getQuantity());
+				//	System.out.println( loopItem.getName() + " " + loopItem.getQuantity());
 				json += objectMapper.writeValueAsString(loopItem) + "\n";
 			}
 			pw.println(json);

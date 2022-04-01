@@ -1,4 +1,6 @@
 package app;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,8 +9,10 @@ import java.util.Scanner;
 /** Class for StoreFront */
 public class StoreFront {
 	/** This is the main method for a program that is a RPG's item shop
-	 * @param args String[]*/
-	public static void main(String[] args) {
+	 * @param args String[]
+	 * @throws IOException 
+	 * @throws FileNotFoundException */
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 
 		// Create object of Inventory stored in inventory 
 		Inventory inventory = new Inventory();
@@ -69,7 +73,6 @@ public class StoreFront {
 				currentItem = inventory.identifyItem(item);
 				// Output stream to prompt the user for how many of the item they want to buy 
 				System.out.print("Enter the amount you want to purchase: ");
-				
 				
 				// Reassign quantity variable with integer input to be then passed onto the Inventory method inventoryCheck 
 				quantity = scnr.nextInt();
