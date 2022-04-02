@@ -95,7 +95,7 @@ public class Health implements ItemInterface, Comparable<Health>
 	}
 	
 	/** Override method to be used with sort. Sorts by alphabetical order
-	* @param weapon Weapon */
+	* @param health Health */
 	@Override
 	public int compareTo(Health health) 
 	{

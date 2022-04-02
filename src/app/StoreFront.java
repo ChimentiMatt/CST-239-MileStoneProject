@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class StoreFront {
 	/** This is the main method for a program that is a RPG's item shop
 	 * @param args String[]
-	 * @throws IOException 
-	 * @throws FileNotFoundException */
+	 * @throws FileNotFoundException throws if file not found
+	 * @throws IOException throws for IOException*/
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
 		// Create object of Inventory stored in inventory 
@@ -80,8 +80,8 @@ public class StoreFront {
 				if (inventory.stockCheck(currentItem, quantity)) {
 					// Adds item to cart
 					inventory.addItemtoCart(currentItem, quantity, shoppingCart);
-					// Update .txt
-					inventory.updateInventory(currentItem, quantity, item);
+					// Update the inventory and JSON file
+					inventory.updateInventory(quantity, item);
 				}
 			}
 			// Check if REPL choice is 3 to show what currently is in the cart
@@ -103,14 +103,14 @@ public class StoreFront {
 				// Removes item from cart, right now always 1 at a time
 				inventory.removeItemFromCart(currentItem, 1, shoppingCart);
 				
-				inventory.updateInventory(currentItem, -1, item);
+				inventory.updateInventory( -1, item);
 				
 			}
 			// Check if REPL choice is 5 to do logic that end the transaction or 'checkout.' 
 			else if (choice == 5) 
 			{
-				
-				inventory.saveToFile("inventory.txt", true);
+				// Save the contents of the inventory
+				inventory.saveToFile();
 				// Invoke the .printCart() method from Inventory to Output Stream the items currently in the users cart 
 				inventory.printCart(shoppingCart);
 				// Invoke the .checkout() method from Inventory to handle logics of clearing out shopping cart and purchasing item 

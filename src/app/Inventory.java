@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,21 +27,26 @@ public class Inventory {
 	private Object smallPotion = new SmallPotion();
 	/** Create object for shop item MediumPotion*/
 	private Object mediumPotion = new MediumPotion();
-	
 	/** Create an ArrayList for ItemInterface to be used with reading and writing the file */
 	static ArrayList<ItemInterface> updatedArray = new ArrayList<ItemInterface>();
 	
-	public void updateInventory(Object object, int number, String itemName) {
-		updatedArray.clear();
-		
+	/** Method that allows the inventory to be updated. Both increasing and decreasing stock. 
+	 * creates a new ArrayList to be and clears the global ArrayList
+	 *  the new ArrayList is then loops over with logic that adds to the global ArrayList to match the correct stock amount
+	 * @param number integer
+	 *  @param itemName string 
+	 * @throws IOException  throws for IOException*/
+	public void updateInventory(int number, String itemName) throws IOException {
+		// Make an array to save the content of the read file in
 		ArrayList<ItemInterface> itemArray = new ArrayList<ItemInterface>();
+		// Clear array as the whole file will be read again
+		updatedArray.clear();
 		
 		try {
 			// Open the file File to read
 			File file = new File("inventory.json");
 			Scanner s = new Scanner(file);
 		
-			
 			// Create list of Cars by reading JSON file
 			while(s.hasNext())
 			{
@@ -55,67 +61,31 @@ public class Inventory {
 		catch(IOException e)
 		{
 			// Print exception
-			// Discussion: what is wrong with this code?
 			e.printStackTrace();
 		}
 		
-//		ArrayList<ItemInterface> itemArray = readFromFile("inventory.json");
+		// Loop over read file and reduce quantity if item was removed from cart
 		for(ItemInterface loopItem : itemArray)
 		{
-			
 			if (loopItem.getName().toLowerCase().equals(itemName.toLowerCase()))
-			{
 				loopItem.reduceQuantity(number);
-				updatedArray.add(loopItem);
-			}
-			else {
-				
-				updatedArray.add(loopItem);
-				
-			}
+			updatedArray.add(loopItem);
 		}
-
-		saveToFile("", true);
-//		for(int i = 0; i < updatedArray.size(); i++)
-//		{
-//			System.out.println("DEBUG PRINT" + updatedArray.get(i).getName() + "\t" + updatedArray.get(i).getQuantity() );
-//		}
-
+		// Writes to JSON file
+		saveToFile();
 	}
 	
 
-	/**  Output stream displaying the item, price and available quantity.
-	 * @throws IOException */
-	public void getInventory() throws IOException 
+	/** Output stream displaying the item, price and available quantity.
+	 * if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
+	 * @throws FileNotFoundException throws if file not found
+	 * @throws IOException throws for IOException*/
+	public void getInventory() throws FileNotFoundException, IOException 
 	{
-		ArrayList<ItemInterface> itemArray = new ArrayList<ItemInterface>();
-		
-		try {
-			// Open the file File to read
-			File file = new File("inventory.json");
-			Scanner s = new Scanner(file);
-		
-			
-			// Create list of Cars by reading JSON file
-			while(s.hasNext())
-			{
-				// Read a string of JSON and convert to an item
-				String json = s.nextLine();
-				ObjectMapper objectMapper = new ObjectMapper();
-				RustySword item = objectMapper.readValue(json,  RustySword.class);
-				itemArray.add(item);
-			}
-			s.close();
-		}
-		catch(IOException e)
-		{
-			// Print exception
-			// Discussion: what is wrong with this code?
-			e.printStackTrace();
-		}
+		// Make an ArrayList to save the content of the read file in
+		ArrayList<ItemInterface> itemArray = readFromFile();
 
-//		ArrayList<ItemInterface> itemArray = readFromFile("inventory.json");
-//
+		// if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
 		if (updatedArray.size() == 0)
 		{
 			for(ItemInterface loopItem : itemArray)
@@ -133,10 +103,11 @@ public class Inventory {
 		
 	}
 	
-	public static void saveToFile(String fileName, boolean append)
+	/** Method that is used to write to the JSON file when invoked
+	 * @throws IOException throws for IOException */
+	public static void saveToFile() throws IOException
 	{
 		PrintWriter pw;
-		
 		try
 		{
 			// Create a file File to 
@@ -166,14 +137,17 @@ public class Inventory {
 		}
 	}
 	
-	
-	public static ArrayList<ItemInterface> readFromFile(String filename)
+	/** Method used to read from the JSON file, making an ArrayList of the items
+	 * @throws FileNotFoundException throws if file not found
+	 * @throws IOException throws for IOException 
+	 * @return ArrayList */
+	public static ArrayList<ItemInterface> readFromFile() throws FileNotFoundException, IOException
 	{
 		ArrayList<ItemInterface> items = new ArrayList<ItemInterface>();
 		try 
 		{
 			// Open the file File to read
-			File file = new File(filename);
+			File file = new File("inventory.json");
 			Scanner scnr = new Scanner(file);
 			
 			// Create list of Items by reading JSON file
