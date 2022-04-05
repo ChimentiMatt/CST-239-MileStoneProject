@@ -27,9 +27,12 @@ public class StoreFront {
 		// Variable to store quantity of items 
 		int quantity;
 		Object currentItem;
+		String order;
+		String sortedBy;
 		
 		// Output streams to green the user 
 		System.out.println("\nWelcome to Grumbling Goblins Gladiator\n");
+		
 			
 		// Start of the game REPL
 		while (true) {
@@ -48,8 +51,25 @@ public class StoreFront {
 			// Check if REPL choice is 1 to show inventory and potentially description of item
 			if (choice == 1) 
 			{
+				// Output stream asking for either ascending or descending order
+				System.out.print("View items by Ascending, Descending: ");
+				// Receive choice with scanner
+				order = scnr.next().toLowerCase();
+				// Output stream asking for either name or price
+				System.out.print("View items by Name or Price: ");
+				// Receive choice with scanner
+				sortedBy = scnr.next().toLowerCase();
+				// Using the two values collected, sort and print accordingly
+				if (order.equals("ascending") && sortedBy.equals("name"))
+					inventory.getInventory(true, true, false);
+				else if (order.equals("descending") && sortedBy.equals("name"))
+					inventory.getInventory(false, true, false);
+				else if (order.equals("descending") && sortedBy.equals("price"))
+					inventory.getInventory(false, false, true);
+				else if (order.equals("ascending") && sortedBy.equals("price"))
+					inventory.getInventory(true, false, true);
 				// invoke the .getInventory method from Inventory to Output Stream the available inventory
-				inventory.getInventory();
+				
 				// Output streams to prompt the user to go back or name an item to see the description 
 				System.out.print("Enter a items name to see its description or enter 'back': ");
 				// Reassign item variable with input from user to use next to get description of item 
@@ -58,13 +78,12 @@ public class StoreFront {
 				currentItem = inventory.identifyItem(item);
 				// Invoke the .getItemDescription method from Inventory 
 				inventory.getItemDescription(currentItem);
+				
 			}
 			
 			// Check if REPL choice is 2 to do logic that places item in cart 
 			else if (choice == 2)
 			{
-				// Invoke the .getInventory method from Inventory to Output Stream the available inventory 
-				inventory.getInventory();
 				// Output stream to prompt the user to name item with an input 
 				System.out.print("Enter the items name you wish to add: ");
 				// Reassign item variable with input from user to then do inventory and cart logics 
@@ -121,6 +140,7 @@ public class StoreFront {
 			{
 				// Output stream to prompt Goodbye 
 				System.out.println("\nGoodbye Gladiator");
+				scnr.close();
 				// Use Break keyword to end program as user selected Leave from the REPL
 				break;
 			}

@@ -1,6 +1,8 @@
 package app;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,7 +30,95 @@ public class Inventory {
 	/** Create object for shop item MediumPotion*/
 	private Object mediumPotion = new MediumPotion();
 	/** Create an ArrayList for ItemInterface to be used with reading and writing the file */
-	static ArrayList<ItemInterface> updatedArray = new ArrayList<ItemInterface>();
+	static ArrayList<ItemInterface> buildingArray = new ArrayList<ItemInterface>();
+	
+	
+	/** Generic method that takes in an inputArray and prints out the data either in ascending/descending with name or price
+	 * @param ascending boolean
+	 * @param name boolean
+	 * @param price boolean
+	 * @param updatedArray E[]*/
+	public void printArray(ArrayList<ItemInterface> updatedArray, boolean ascending, boolean name, boolean price)
+	{
+		System.out.println("\nGrumbling Goblins Stock--------------------------------");
+		// if name was chosen
+		if(name) {
+
+			Comparator<ItemInterface> compareByName = (ItemInterface o1, ItemInterface o2) -> o1.getName().compareTo( o2.getName());
+			
+			// Sort Algorithm in collections 
+			Collections.sort(updatedArray, compareByName);
+			
+			if (ascending == false) {
+				System.out.println("REVERSE");
+				Collections.sort(updatedArray, Collections.reverseOrder());
+			}
+		}
+		// if price was chosen in ascending order
+		else if(price == true  && ascending == true) {
+			updatedArray.sort((a, b) -> {
+	                if (a.getPrice() > b.getPrice()) {
+	                    return -1;
+	                }
+	                if (a.getPrice() < b.getPrice()) {
+	                    return 1;
+	                }
+	                return 0;
+	            });
+		}
+		// if price was chosen in descending order
+		else 
+		{
+			updatedArray.sort((a, b) -> {
+                if (a.getPrice() > b.getPrice()) {
+                    return 1;
+                }
+                if (a.getPrice() < b.getPrice()) {
+                    return -1;
+                }
+                return 0;
+            });
+		}
+		
+		// Output stream using forEach the information using the forEach algorithm in collections 
+		updatedArray.forEach(element -> System.out.println(element.getName() + "\t\t" + element.getPrice() + " copper " + "\t stock: " + element.getQuantity()));
+	}
+	
+	/** Method that saves the array to the JSON file
+	 * @param updateARray ArrayList
+	 * @throws IOExeception IOEception*/
+	public static void saveArray(ArrayList<ItemInterface> updatedArray) throws IOException
+	{
+		PrintWriter pw;
+		try
+		{
+			// Create a file File to 
+			File file = new File("inventory.json");
+			
+			FileWriter fw = new FileWriter(file, false);
+			pw = new PrintWriter(fw);
+			
+			
+			// Write items into JSON
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = "";
+			for(ItemInterface loopItem : updatedArray)
+			{
+				json += objectMapper.writeValueAsString(loopItem) + "\n";
+			}
+			pw.println(json);
+			
+			// Cleanup
+			pw.close();
+			
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	/** Method that allows the inventory to be updated. Both increasing and decreasing stock. 
 	 * creates a new ArrayList to be and clears the global ArrayList
@@ -40,7 +130,7 @@ public class Inventory {
 		// Make an array to save the content of the read file in
 		ArrayList<ItemInterface> itemArray = new ArrayList<ItemInterface>();
 		// Clear array as the whole file will be read again
-		updatedArray.clear();
+		buildingArray.clear();
 		
 		try {
 			// Open the file File to read
@@ -69,7 +159,7 @@ public class Inventory {
 		{
 			if (loopItem.getName().toLowerCase().equals(itemName.toLowerCase()))
 				loopItem.reduceQuantity(number);
-			updatedArray.add(loopItem);
+			buildingArray.add(loopItem);
 		}
 		// Writes to JSON file
 		saveToFile();
@@ -80,61 +170,25 @@ public class Inventory {
 	 * if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
 	 * @throws FileNotFoundException throws if file not found
 	 * @throws IOException throws for IOException*/
-	public void getInventory() throws FileNotFoundException, IOException 
+	public void getInventory(boolean ascending, boolean name, boolean price) throws FileNotFoundException, IOException 
 	{
 		// Make an ArrayList to save the content of the read file in
 		ArrayList<ItemInterface> itemArray = readFromFile();
 
-		// if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
-		if (updatedArray.size() == 0)
-		{
-			for(ItemInterface loopItem : itemArray)
-			{
-				//	String text = loopItem.getName() + " \t\t stock: " + loopItem.getQuantity();
-				System.out.println(loopItem.getName() + " \t\t stock: " + loopItem.getQuantity());
-			}
-		}
-		else {
-			for(int i = 0; i < updatedArray.size(); i++)
-			{
-				System.out.println(updatedArray.get(i).getName() + "\t\t stock: " + updatedArray.get(i).getQuantity() );
-			}
-		}
 		
+		// if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
+		if (buildingArray.size() == 0)
+			printArray(itemArray, ascending, name, price);
+		else 
+			printArray(buildingArray, ascending, name, price);
+
 	}
 	
 	/** Method that is used to write to the JSON file when invoked
 	 * @throws IOException throws for IOException */
 	public static void saveToFile() throws IOException
 	{
-		PrintWriter pw;
-		try
-		{
-			// Create a file File to 
-			File file = new File("inventory.json");
-			
-			FileWriter fw = new FileWriter(file, false);
-			pw = new PrintWriter(fw);
-			
-			
-			// Write items into JSON
-			ObjectMapper objectMapper = new ObjectMapper();
-			String json = "";
-			for(ItemInterface loopItem : updatedArray)
-			{
-				//	System.out.println( loopItem.getName() + " " + loopItem.getQuantity());
-				json += objectMapper.writeValueAsString(loopItem) + "\n";
-			}
-			pw.println(json);
-			
-			// Cleanup
-			pw.close();
-			
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
+		saveArray(buildingArray);
 	}
 	
 	/** Method used to read from the JSON file, making an ArrayList of the items
