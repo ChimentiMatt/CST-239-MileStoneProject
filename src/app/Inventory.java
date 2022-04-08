@@ -50,7 +50,7 @@ public class Inventory {
 			Collections.sort(updatedArray, compareByName);
 			
 			if (ascending == false) {
-				System.out.println("REVERSE");
+				
 				Collections.sort(updatedArray, Collections.reverseOrder());
 			}
 		}
@@ -85,7 +85,7 @@ public class Inventory {
 	}
 	
 	/** Method that saves the array to the JSON file
-	 * @param updateARray ArrayList
+	 * @param updatedArray ArrayList
 	 * @throws IOExeception IOEception*/
 	public static void saveArray(ArrayList<ItemInterface> updatedArray) throws IOException
 	{
@@ -97,7 +97,6 @@ public class Inventory {
 			
 			FileWriter fw = new FileWriter(file, false);
 			pw = new PrintWriter(fw);
-			
 			
 			// Write items into JSON
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -168,6 +167,9 @@ public class Inventory {
 
 	/** Output stream displaying the item, price and available quantity.
 	 * if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
+	 * @param ascending boolean
+	 * @param name boolean
+	 * @param price boolean
 	 * @throws FileNotFoundException throws if file not found
 	 * @throws IOException throws for IOException*/
 	public void getInventory(boolean ascending, boolean name, boolean price) throws FileNotFoundException, IOException 
