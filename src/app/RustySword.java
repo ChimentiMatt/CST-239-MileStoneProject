@@ -8,4 +8,8 @@ public class RustySword extends Weapon
 	{
 		super("RustySword", "Attack Power: 1. A sword for those low on copper", 3, 99, 0, 0, 2);
 	}
+//	public RustySword(String newItem)
+//	{
+//		super(newItem, "Attack Power: 1. A sword for those low on copper", 3, 99, 0, 0, 2);
+//	}
 }

@@ -139,7 +139,7 @@ public class Inventory {
 			// Create list of Cars by reading JSON file
 			while(s.hasNext())
 			{
-				// Read a string of JSON and convert to a Car
+				// Read a string of JSON and convert to a RustySword
 				String json = s.nextLine();
 				ObjectMapper objectMapper = new ObjectMapper();
 				RustySword item = objectMapper.readValue(json,  RustySword.class);
@@ -357,50 +357,6 @@ public class Inventory {
 			return null;
 		}
 	}
-	
-	/** Sort the weapons item alphabetically by invoking Arrays.sort which then uses the compareTo method that has been overwritten  
-	 * then output streams the result */
-	public void getWeaponList() {
-		Weapon[] weapon = new Weapon[2];
-		weapon[0] = new Weapon("RustySword", "Attack Power: 1. A sword for those low on copper", 3, ((Weapon)rustySword).getQuantity(), 0, 0, 2);
-		weapon[1] = new Weapon("CopperSword", "Attack Power: 3. It's a very impractical metal for a weapon", 8, ((Weapon)copperSword).getQuantity(), 0, 0, 5);
 
-		Arrays.sort(weapon);
-		for (int i = 0; i < 2; i++)
-		{
-			System.out.println(weapon[i].getName() + "\t" + weapon[i].getPrice() + " copper" + "\tStock: " + weapon[i].getQuantity());
-		}
-		System.out.println("");
-	}
-	
-	/** Sort the armors item alphabetically by invoking Arrays.sort which then uses the compareTo method that has been overwritten  
-	 * then output streams the result */
-	public void getArmorList() {
-		Armor[] armor = new Armor[2];
-		armor[0] = new Armor("ClothPants", "Defense: 1. Pants not even good enough to stop a cold breeze ", 1, ((Armor)clothPants).getQuantity(), 2, 0, 0);
-		armor[1] = new Armor("DustyCloak", "Defense: 3. It's old and it does not smell right", 3, ((Armor)dustyCloak).getQuantity(), 3, 0, 0);
-
-		Arrays.sort(armor);
-		for (int i = 0; i < 2; i++)
-		{
-			System.out.println(armor[i].getName() + "\t" + armor[i].getPrice() + " copper" + "\tStock: " + armor[i].getQuantity());
-		}
-		System.out.println("");
-	}
-	
-	/** Sort the health items alphabetically by invoking Arrays.sort which then uses the compareTo method that has been overwritten 
-	 * then output streams the result  */
-	public void getHealthList() {
-		Health[] health = new Health[2];
-		health[0] = new Health("SmallPotion", "Heals: 15 hp. It has an odd smell and uncanny bubbles but mends minor wounds", 4, ((Health)smallPotion).getQuantity(), 0, 15, 0);
-		health[1] = new Health("MediumPotion", "Heals: 40hp. If it didnt save your life, you wouldn't drink something so vile", 10, ((Health)mediumPotion).getQuantity(), 0, 40, 0);
-
-		Arrays.sort(health);
-		for (int i = 0; i < 2; i++)
-		{
-			System.out.println(health[i].getName() + "\t" + health[i].getPrice() + " copper" + "\tStock: " + health[i].getQuantity() );
-		}
-		System.out.println("");
-	}
 	
 }
