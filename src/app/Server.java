@@ -25,7 +25,7 @@ public class Server {
 		System.out.println("Recieved a Client connection .......");
 		serverSocket = new ServerSocket(port);
 		ClientSocket = serverSocket.accept();
-		String testString;
+		String sendString;
 		
 		// If you get here then a Client connected to this Server so create some input and output network buffers
 		System.out.println("Recieved a Client connection on port " + ClientSocket.getLocalPort());
@@ -45,14 +45,9 @@ public class Server {
 			}
 			else if ("R".equals(inputLine))
 			{
-				testString =ServerApp.readFromFileAdmin();
-//				System.out.println(ServerApp.getStringJSON());
-//				out.println(ServerApp.getStringJSON());
-				
-//				System.out.println("test Data: "+ testString + " BETWEEN");
-				
-//				out.println("APPLE");
-				out.println(testString);
+				sendString = ServerApp.readFromFileAdmin();
+
+				out.println(sendString);
 //				
 			}
 			else // for U

@@ -14,28 +14,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.UnknownHostException;
 
 
-
+/** Class for Server*/
 public class ServerApp {
 	static ArrayList<ItemInterface> buildingArrayAdmin = new ArrayList<ItemInterface>();
 	static String outString;
 	
+	/** Main method 
+	 * @param args String[]
+	 * @throws IOException throws for IOException
+	 * @throws UnknownHostException UnknownHostException*/
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException
 	{
 		ServerThread serverThread = new ServerThread();
 		serverThread.start();
 	}
 	
-//	
-//	public static String getStringJSON() {
-//		return outString;
-//		
-//	}
-	
-	
 	
 	/** Reads from the JSON file
 	 * @throws FileNotFoundException throws if file not found
-	 * @throws IOException throws for IOException*/
+	 * @throws IOException throws for IOException
+	 * @return sendString String*/
 	public static String readFromFileAdmin() throws FileNotFoundException, IOException
 	{
 		ArrayList<ItemInterface> items = new ArrayList<ItemInterface>();
@@ -73,11 +71,11 @@ public class ServerApp {
 	
 
 	
-	/** Method that allows the inventory to be updated. Both increasing and decreasing stock. 
+	/** Method that allows the inventory to be updated. 
 	 * creates a new ArrayList to be and clears the global ArrayList
-	 *  the new ArrayList is then loops over with logic that adds to the global ArrayList to match the correct stock amount
+	 * the new ArrayList is then loops over with logic that adds to the global ArrayList to match the correct stock amount
 	 * @param number integer
-	 * @param itemName string 
+	 * @param JSONItem string 
 	 * @throws IOException  throws for IOException*/
 	public static void updateInventoryAdmin(int number, String JSONItem) throws IOException {
 		// Make an array to save the content of the read file in
@@ -90,7 +88,7 @@ public class ServerApp {
 			File file = new File("inventory.json");
 			Scanner s = new Scanner(file);
 		
-			// Create list of Cars by readsing JSON file
+			// Create list of Cars by Reading JSON file
 			while(s.hasNext())
 			{
 				// Read a string of JSON and convert to a RustySword
@@ -117,7 +115,7 @@ public class ServerApp {
 		saveToFileAdmin(JSONItem);
 	}
 	
-	/** Method that is used to write to the JSON file when invoked
+	/** Method that calls saveArrayAdmin so I can pass in the JSON String
 	 * @param JSONItem String
 	 * @throws IOException throws for IOException */
 	public static void saveToFileAdmin(String JSONItem) throws IOException

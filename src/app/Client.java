@@ -26,8 +26,8 @@ public class Client {
 	/** Starts the client server
 	 * @param ip String
 	 * @param port integer
-	 * @throws UnknownHostException
-	 * @throws IOException*/
+	 * @throws UnknownHostException UnknownHostException
+	 * @throws IOException IOException*/
 	public void start(String ip, int port) throws UnknownHostException, IOException
 	{
 		// Connect to the Remote Server on the specified IP Address and Port
@@ -40,7 +40,7 @@ public class Client {
 	
 	/** Sends the server message
 	 * @param msg String
-	 * @throws IOException*/
+	 * @throws IOException IOException*/
 	public String sendMessage(String msg) throws IOException
 	{
 		// sendPrint a message to the server with a termination line feed
@@ -50,7 +50,8 @@ public class Client {
 	
 	/** Sends the JSON Message
 	 * @param jSONPackage ObjectNode
-	 * @throws IOException*/
+	 * @throws IOException IOException
+	 * @return JSONPackage String*/
 	public String sendJSONMessage(ObjectNode jSONPackage) throws IOException
 	{
 		// sendPrint a message to the server with a termination line feed
@@ -59,7 +60,7 @@ public class Client {
 	}
 	
 	/** Cleans up the server
-	 * @throws IOException*/
+	 * @throws IOException IOException*/
 	public void cleanup() throws IOException
 	{
 		// Close all input and output network buffers and sockets
@@ -100,8 +101,11 @@ public class Client {
 			message = myScnr.nextLine();
 				
 			
-				if (message.equals("Q"))
+				if (message.equals("Q")) {
 					System.out.println("Goodbye");
+					break;
+				}
+				
 				
 				else if (message.equals("U")) {
 					System.out.println("Enter the item Name:: ");
@@ -152,9 +156,6 @@ public class Client {
 					
 					
 					System.out.println("Current Items: \n" + printSting);
-				}
-				else {
-					break;
 				}
 			}
 		
