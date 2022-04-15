@@ -17,6 +17,7 @@ import java.net.UnknownHostException;
 
 public class ServerApp {
 	static ArrayList<ItemInterface> buildingArrayAdmin = new ArrayList<ItemInterface>();
+	static String outString;
 	
 	public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException
 	{
@@ -24,43 +25,41 @@ public class ServerApp {
 		serverThread.start();
 	}
 	
+//	
+//	public static String getStringJSON() {
+//		return outString;
+//		
+//	}
 	
 	
-	/** Output stream displaying the item, price and available quantity.
-	 * if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
-	 * @param ascending boolean
-	 * @param name boolean
-	 * @param price boolean
+	
+	/** Reads from the JSON file
 	 * @throws FileNotFoundException throws if file not found
 	 * @throws IOException throws for IOException*/
-	public static void getInventoryAdmin(boolean ascending, boolean name, boolean price) throws FileNotFoundException, IOException 
-	{
-		// Make an ArrayList to save the content of the read file in
-		ArrayList<ItemInterface> itemArray = readFromFileAdmin();
-		
-	}
-	
-	public static ArrayList<ItemInterface> readFromFileAdmin() throws FileNotFoundException, IOException
+	public static String readFromFileAdmin() throws FileNotFoundException, IOException
 	{
 		ArrayList<ItemInterface> items = new ArrayList<ItemInterface>();
+		String printString = "";
+		String sendString = "";
 		try 
 		{
 			// Open the file File to read
 			File file = new File("inventory.json");
 			Scanner scnr = new Scanner(file);
-			String printString = "";
+
 			// Create list of Items by reading JSON file
 			while(scnr.hasNext())
 			{
 				// Read a string of JSON and convert to a item
 				String json = scnr.nextLine();
-				printString += "\n" + json;
+				printString += json + "\n";
+				sendString += json;
 				ObjectMapper objectMapper = new ObjectMapper();
 				RustySword item = objectMapper.readValue(json, RustySword.class);
 				items.add(item);
 			}
-
 			System.out.println(printString);
+			outString = printString;
 			// Cleanup
 			scnr.close();
 		}
@@ -69,27 +68,16 @@ public class ServerApp {
 			// Print Exception
 			e.printStackTrace();
 		}
-		return items;
+		return sendString;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	/** Method that allows the inventory to be updated. Both increasing and decreasing stock. 
 	 * creates a new ArrayList to be and clears the global ArrayList
 	 *  the new ArrayList is then loops over with logic that adds to the global ArrayList to match the correct stock amount
 	 * @param number integer
-	 *  @param itemName string 
+	 * @param itemName string 
 	 * @throws IOException  throws for IOException*/
 	public static void updateInventoryAdmin(int number, String JSONItem) throws IOException {
 		// Make an array to save the content of the read file in
@@ -119,26 +107,18 @@ public class ServerApp {
 			e.printStackTrace();
 		}
 		
-		
-		
-//		Object newItem = new ItemTemplate(itemName);
-//		buildingArrayAdmin.add((ItemInterface) newItem);
-		
-		
-//		// Loop over read file and reduce quantity if item was removed from cart
+		// Loop over read file and reduce quantity if item was removed from cart
 		for(ItemInterface loopItem : itemArray)
 		{
-//			if (loopItem.getName().toLowerCase().equals(itemName.toLowerCase()))
-//				loopItem.reduceQuantity(number);
 			buildingArrayAdmin.add(loopItem);
 		}
-		
 		
 		// Writes to JSON file
 		saveToFileAdmin(JSONItem);
 	}
 	
 	/** Method that is used to write to the JSON file when invoked
+	 * @param JSONItem String
 	 * @throws IOException throws for IOException */
 	public static void saveToFileAdmin(String JSONItem) throws IOException
 	{
@@ -148,6 +128,7 @@ public class ServerApp {
 	
 	/** Method that saves the array to the JSON file
 	 * @param updatedArray ArrayList
+	 * @param JSONItem String
 	 * @throws IOExeception IOEception*/
 	public static void saveArrayAdmin(ArrayList<ItemInterface> updatedArray, String JSONItem) throws IOException
 	{

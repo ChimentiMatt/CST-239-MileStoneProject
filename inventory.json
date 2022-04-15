@@ -1,3 +1,11 @@
+{"name":"test8","description":"1","price":1,"quantity":1,"defense":1,"healingPower":1,"attackPower":1}
+{"name":"test7","description":"1","price":1,"quantity":1,"defense":1,"healingPower":1,"attackPower":1}
+{"name":"test6","description":"1","price":1,"quantity":1,"defense":1,"healingPower":1,"attackPower":1}
+{"name":"test6","description":"1","price":1,"quantity":11,"defense":1,"healingPower":1,"attackPower":1}
+{"name":"test5","description":"1","price":1,"quantity":1,"defense":1,"healingPower":1,"attackPower":1}
+{"name":"test111","description":"s","price":2,"quantity":2,"defense":2,"healingPower":22,"attackPower":2}
+{"name":"dogsss","description":"bark","price":2,"quantity":2,"defense":2,"healingPower":2,"attackPower":2}
+{"name":"Cat","description":"dog","price":1,"quantity":1,"defense":1,"healingPower":1,"attackPower":1}
 {"name":"Dogo","description":"Goodboy","price":1,"quantity":1,"defense":1,"healingPower":1,"attackPower":1}
 {"name":"catSword","description":"Attack Power: 1. A sword for those low on copper","price":3,"quantity":99,"defense":0,"healingPower":0,"attackPower":2}
 {"name":"RustySword","description":"Attack Power: 1. A sword for those low on copper","price":3,"quantity":98,"defense":0,"healingPower":0,"attackPower":2}
