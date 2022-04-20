@@ -79,6 +79,13 @@ public class Weapon implements ItemInterface, Comparable<Weapon>
 	public int getAttackPower() {
 		return attackPower;
 	}
+	
+	/** Method that sets description
+	 * @param num integer */
+	@Override
+	public void setDescription(String words) {
+		this.description = words;
+	}
 
 	/** Method that adds 1 to weapon quantity or stock
 	 * @param num integer */
@@ -86,6 +93,7 @@ public class Weapon implements ItemInterface, Comparable<Weapon>
 	public void increaseQuantity(int num) {
 		this.quantity = this.quantity + num;
 	}
+	
 	
 	/** Method that removes 1 to weapon quantity or stock
 	 * @param num integer */

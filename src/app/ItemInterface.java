@@ -30,4 +30,7 @@ public interface ItemInterface
 	/**  Declare integer method reduceQuantity() in ItemInterface 
 	 * @param num integer */
 	public void reduceQuantity(int num);
+	/** Method that sets description
+	 * @param words String */
+	void setDescription(String words);
 }

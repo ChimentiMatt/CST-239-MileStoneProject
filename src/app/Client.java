@@ -99,13 +99,11 @@ public class Client {
 		while (true) {
 			System.out.println("Welcome to ADMIN Client: Enter a command: U / R or Q to quit: ");
 			message = myScnr.nextLine();
-				
 			
 				if (message.equals("Q")) {
 					System.out.println("Goodbye");
 					break;
 				}
-				
 				
 				else if (message.equals("U")) {
 					System.out.println("Enter the item Name:: ");
@@ -133,10 +131,7 @@ public class Client {
 					JSONPackage.put("healingPower", healingPower);
 					JSONPackage.put("attackPower", attackPower);
 					
-					// System.out.println(JSONPackage);
-					
 					response = client.sendJSONMessage(JSONPackage);
-	
 				}
 				else if (message.equals("R")) {
 					response = client.sendMessage(message);
@@ -151,15 +146,10 @@ public class Client {
 							else {
 								printSting += response.charAt(i);
 							}
-							
-						}
-					
-					
+						}			
 					System.out.println("Current Items: \n" + printSting);
 				}
 			}
-		
-		
 		// On exit cleans everything up
 		System.out.println("cleaning up");
 		client.cleanup();

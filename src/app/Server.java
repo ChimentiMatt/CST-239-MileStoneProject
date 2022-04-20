@@ -47,8 +47,7 @@ public class Server {
 			{
 				sendString = ServerApp.readFromFileAdmin();
 
-				out.println(sendString);
-//				
+				out.println(sendString);			
 			}
 			else // for U
 			{
@@ -58,7 +57,6 @@ public class Server {
 				out.println("End");
 			}
 		}
-		
 		// Exit message that Server is shut down
 		System.out.println("Server is shut down");
 	}

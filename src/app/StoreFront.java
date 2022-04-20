@@ -78,7 +78,6 @@ public class StoreFront {
 				currentItem = inventory.identifyItem(item);
 				// Invoke the .getItemDescription method from Inventory 
 				inventory.getItemDescription(currentItem);
-				
 			}
 			
 			// Check if REPL choice is 2 to do logic that places item in cart 
@@ -122,8 +121,7 @@ public class StoreFront {
 				// Removes item from cart, right now always 1 at a time
 				inventory.removeItemFromCart(currentItem, 1, shoppingCart);
 				
-				inventory.updateInventory( -1, item);
-				
+				inventory.updateInventory(-1, item);	
 			}
 			// Check if REPL choice is 5 to do logic that end the transaction or 'checkout.' 
 			else if (choice == 5) 

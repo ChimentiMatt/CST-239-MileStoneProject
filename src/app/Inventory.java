@@ -32,7 +32,6 @@ public class Inventory {
 	/** Create an ArrayList for ItemInterface to be used with reading and writing the file */
 	static ArrayList<ItemInterface> buildingArray = new ArrayList<ItemInterface>();
 	
-	
 	/** Generic method that takes in an inputArray and prints out the data either in ascending/descending with name or price
 	 * @param ascending boolean
 	 * @param name boolean
@@ -109,7 +108,6 @@ public class Inventory {
 			
 			// Cleanup
 			pw.close();
-			
 		}
 		catch(IOException e)
 		{
@@ -117,13 +115,11 @@ public class Inventory {
 		}
 	}
 	
-	
-	
 	/** Method that allows the inventory to be updated. Both increasing and decreasing stock. 
 	 * creates a new ArrayList to be and clears the global ArrayList
 	 *  the new ArrayList is then loops over with logic that adds to the global ArrayList to match the correct stock amount
 	 * @param number integer
-	 *  @param itemName string 
+	 * @param itemName string 
 	 * @throws IOException  throws for IOException*/
 	public void updateInventory(int number, String itemName) throws IOException {
 		// Make an array to save the content of the read file in
@@ -164,7 +160,6 @@ public class Inventory {
 		saveToFile();
 	}
 	
-
 	/** Output stream displaying the item, price and available quantity.
 	 * if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
 	 * @param ascending boolean
@@ -176,14 +171,12 @@ public class Inventory {
 	{
 		// Make an ArrayList to save the content of the read file in
 		ArrayList<ItemInterface> itemArray = readFromFile();
-
 		
 		// if the updatedArray does not exist yet as there has not been a moment where the inventory changed, it reads directly from JSON
 		if (buildingArray.size() == 0)
 			printArray(itemArray, ascending, name, price);
 		else 
 			printArray(buildingArray, ascending, name, price);
-
 	}
 	
 	/** Method that is used to write to the JSON file when invoked
@@ -227,7 +220,6 @@ public class Inventory {
 		return items;
 		
 	}
-	
 	
 	/**  Output stream displaying the item description. If invalid selection, output stream tells user
 	 * @param object Object.*/

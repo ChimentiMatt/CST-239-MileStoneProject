@@ -11,9 +11,16 @@ public class ShoppingCart
 	private int bill;
 	
 	/** Constructor to initialize bill */
-	ShoppingCart() 
+	public ShoppingCart() 
 	{
 		this.bill = 0;
+	}
+	
+	/** Getter that returns the inCart Array
+	 * @return inCartArray inCartArray*/
+	public ArrayList<ItemInterface> getArray() 
+	{
+		return inCartArray;
 	}
 	
 	/** Getter that returns an integer of the total bill 

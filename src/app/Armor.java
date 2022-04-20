@@ -80,6 +80,13 @@ public class Armor implements ItemInterface, Comparable<Armor>
 		return attackPower;
 	}
 	
+	/** Method that sets description
+	 * @param num integer */
+	@Override
+	public void setDescription(String words) {
+		this.description = words;
+	}
+	
 	/** Method that adds 1 to Armor quantity or stock
 	 * @param num integer */
 	@Override
@@ -107,5 +114,4 @@ public class Armor implements ItemInterface, Comparable<Armor>
 		else 
 			return value;
 	}
-
 }

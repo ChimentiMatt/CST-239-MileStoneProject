@@ -29,7 +29,6 @@ public class ServerApp {
 		serverThread.start();
 	}
 	
-	
 	/** Reads from the JSON file
 	 * @throws FileNotFoundException throws if file not found
 	 * @throws IOException throws for IOException

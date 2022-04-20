@@ -80,6 +80,13 @@ public class Health implements ItemInterface, Comparable<Health>
 		return attackPower;
 	}
 	
+	/** Method that sets description
+	 * @param num integer */
+	@Override
+	public void setDescription(String words) {
+		this.description = words;
+	}
+	
 	/** Method that adds 1 to Health quantity or stock
 	 * @param num integer */
 	@Override
